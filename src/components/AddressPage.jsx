@@ -67,7 +67,7 @@ export default function AddressPage({ onSubmit }) {
     setErrors(e);
     setTouched(Object.fromEntries(FIELDS.map((f) => [f.name, true])));
     if (Object.keys(e).length) {
-      document.querySelector(".field.has-error input")?.focus();
+      document.querySelector(".em-field.em-has-error input")?.focus();
       return;
     }
 
@@ -80,33 +80,12 @@ export default function AddressPage({ onSubmit }) {
 
   return (
     <div className="em-page">
-      <header className="em-header">
-        <a className="em-brand" href="/">
-          <span className="em-logo" aria-hidden="true">♻</span>
-          EchoMarket
-        </a>
-        <div className="em-search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <circle cx="11" cy="11" r="7" />
-            <path d="m20 20-3.5-3.5" />
-          </svg>
-          <input type="search" placeholder="Pencarian" aria-label="Pencarian" />
-        </div>
-        <nav className="em-icons" aria-label="Menu akun">
-          <button type="button" aria-label="Keranjang">🛒</button>
-          <button type="button" aria-label="Notifikasi">🔔</button>
-          <button type="button" aria-label="Pesan">💬</button>
-          <button type="button" aria-label="Favorit">♡</button>
-          <span className="em-avatar" aria-label="Profil">MK</span>
-        </nav>
-      </header>
-
-      <main className="em-main">
+      <div className="em-main">
         <h1>Tambah alamat baru</h1>
 
         <div className="em-layout">
           <form className="em-card" onSubmit={handleSubmit} noValidate>
-            <div className="field">
+            <div className="em-field">
               <label htmlFor="label">Label Alamat</label>
               <select id="label" value={form.label} onChange={(e) => set("label", e.target.value)}>
                 {LABELS.map((l) => (
@@ -115,11 +94,11 @@ export default function AddressPage({ onSubmit }) {
               </select>
             </div>
 
-            <div className="grid">
+            <div className="em-grid">
               {FIELDS.map((f) => (
                 <div
                   key={f.name}
-                  className={`field${f.wide ? " wide" : ""}${touched[f.name] && errors[f.name] ? " has-error" : ""}`}
+                  className={`em-field${f.wide ? " em-wide" : ""}${touched[f.name] && errors[f.name] ? " em-has-error" : ""}`}
                 >
                   <label htmlFor={f.name}>{f.label}</label>
                   <input
@@ -140,26 +119,26 @@ export default function AddressPage({ onSubmit }) {
               ))}
             </div>
 
-            <div className="actions">
-              <label className="switch">
+            <div className="em-actions">
+              <label className="em-switch">
                 <input type="checkbox" checked={form.utama} onChange={(e) => set("utama", e.target.checked)} />
-                <span className="track" aria-hidden="true" />
+                <span className="em-track" aria-hidden="true" />
                 Jadikan Alamat Utama
               </label>
-              <button type="submit" className="btn-primary">
+              <button type="submit" className="em-btn-primary">
                 <span aria-hidden="true">+</span> Tambah alamat
               </button>
             </div>
 
             {saved && (
-              <p className="success" role="status">
+              <p className="em-success" role="status">
                 Alamat berhasil ditambahkan.
               </p>
             )}
           </form>
 
         </div>
-      </main>
+      </div>
     </div>
   );
 }
