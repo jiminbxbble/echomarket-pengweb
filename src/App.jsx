@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import ProfileForm from './components/ProfileForm'
+import BuyPage from './BuyPage'
 
 const INITIAL_PROFILE = {
   username: 'Tamu10',
@@ -33,15 +34,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <div className="wrap">
-        <Sidebar
-          name={profile.nama || 'Fauzein'}
-          photo={profile.photo}
-          onEditProfile={() => namaRef.current?.focus()}
-        />
-        <ProfileForm profile={profile} onSave={handleSave} onNotify={notify} namaRef={namaRef} />
-      </div>
-      <div id="toast" className={toast ? 'show' : ''}>{toast}</div>
+      <BuyPage />
     </>
   )
 }
