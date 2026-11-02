@@ -1,11 +1,11 @@
-// Titik awal React untuk halaman Otp
+// Titik awal React untuk halaman Masuk
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Otp from './Otp.jsx'
-import '../auth/auth.css'
+import Masuk from './Masuk.jsx'
+import '../auth.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Otp />
+    <Masuk />
   </StrictMode>
 )

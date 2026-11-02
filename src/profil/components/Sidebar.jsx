@@ -1,5 +1,5 @@
-import Avatar from './Avatar'
-import Icon from './Icon'
+import Avatar from '../../components/Avatar'
+import Icon from '../../components/Icon'
 
 const MENU = [
   { icon: 'user', label: 'Akun saya', page: 'profil' },

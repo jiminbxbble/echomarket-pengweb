@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
-import Navbar from './components/Navbar'
+import Navbar from '../components/Navbar'
 import Sidebar from './components/Sidebar'
 import ProfileForm from './components/ProfileForm'
 

@@ -1,7 +1,7 @@
 // Halaman Daftar (Register) – frame "Signup page" lalu "Daftar" di Figma
 // Langkah 1: isi email. Langkah 2: buat password. Setelah itu pindah ke halaman OTP.
 import { useState } from 'react'
-import { InputPassword, TombolSosial, Kembali, Toast, emailValid, simpan } from '../auth/components/Bagian'
+import { InputPassword, TombolSosial, Kembali, Toast, emailValid, simpan } from '../components/Bagian'
 
 export default function Daftar() {
   const [langkah, setLangkah] = useState(1)

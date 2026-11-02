@@ -1,5 +1,5 @@
-import Item from "./kotak_pensil.jpg"
-import Map from "./map.png"
+const Item = '/img/kotak_pensil.jpg'
+const Map = '/img/map.png'
 
 export default function BuyPage() {
     return (

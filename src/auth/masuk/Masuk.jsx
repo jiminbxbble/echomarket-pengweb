@@ -1,6 +1,6 @@
 // Halaman Masuk (Login) – frame "Login page" di Figma
 import { useState } from 'react'
-import { InputPassword, TombolSosial, Kembali, Toast, emailValid } from '../auth/components/Bagian'
+import { InputPassword, TombolSosial, Kembali, Toast, emailValid } from '../components/Bagian'
 
 export default function Masuk() {
   const [email, setEmail] = useState('')

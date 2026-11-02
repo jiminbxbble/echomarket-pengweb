@@ -1,7 +1,7 @@
 // Halaman Verifikasi OTP – frame "OTP" di Figma
 // 4 kotak angka, hitung mundur 30 detik untuk kirim ulang kode.
 import { useEffect, useRef, useState } from 'react'
-import { Kembali, Toast, ambil } from '../auth/components/Bagian'
+import { Kembali, Toast, ambil } from '../components/Bagian'
 
 const PANJANG = 4
 

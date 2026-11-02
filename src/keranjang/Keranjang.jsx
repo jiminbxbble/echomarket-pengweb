@@ -7,7 +7,7 @@ function Navbar() {
     <header className="navbar-wrapper">
       <nav className="navbar">
         <a href="/beranda.html" className="baris" style={{ textDecoration: "none", color: "inherit", cursor: "pointer" }}>
-          <img src="/logo.png" alt="Logo" className="logo" />
+          <img src="/img/logo-ikon.png" alt="Logo" className="logo" />
           <strong>EchoMarket</strong>
         </a>
 
@@ -24,7 +24,7 @@ function Navbar() {
           <span>💬</span>
           <span>❤️</span>
           <a href="/" title="Profil Saya" style={{ display: "flex", alignItems: "center" }}>
-            <img src="/avatar.png" alt="Profil" className="avatar" />
+            <img src="/img/avatar.png" alt="Profil" className="avatar" />
           </a>
         </div>
       </nav>
@@ -94,7 +94,7 @@ function Keranjang() {
                   onChange={(e) => setDipilih(e.target.checked)}
                 />
                 <img
-                  src="/tempat_pensil.jpg"
+                  src="/img/tempat_pensil.jpg"
                   alt="Tempat pensil dari kardus"
                   className="produk-img"
                 />
@@ -157,7 +157,7 @@ function Keranjang() {
                 rating="4.9"
                 terjual="10rb+ terjual"
                 lokasi="Bandung"
-                gambar="/tempat_pensil.jpg"
+                gambar="/img/tempat_pensil.jpg"
               />
             ))}
           </div>

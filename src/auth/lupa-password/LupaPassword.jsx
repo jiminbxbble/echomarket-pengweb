@@ -2,7 +2,7 @@
 // Langkah 1: isi email -> pop-up "periksa email"
 // Langkah 2: isi password baru -> pop-up "Password berhasil di reset" -> ke halaman Masuk
 import { useState } from 'react'
-import { InputPassword, Kembali, emailValid } from '../auth/components/Bagian'
+import { InputPassword, Kembali, emailValid } from '../components/Bagian'
 
 // Ikon amplop dengan centang (pop-up periksa email)
 function IkonEmail() {

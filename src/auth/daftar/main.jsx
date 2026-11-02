@@ -1,11 +1,11 @@
-// Titik awal React untuk halaman Masuk
+// Titik awal React untuk halaman Daftar
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Masuk from './Masuk.jsx'
-import '../auth/auth.css'
+import Daftar from './Daftar.jsx'
+import '../auth.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Masuk />
+    <Daftar />
   </StrictMode>
 )

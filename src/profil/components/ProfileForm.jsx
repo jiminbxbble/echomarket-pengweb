@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import Avatar from './Avatar'
+import Avatar from '../../components/Avatar'
 import InlineEdit from './InlineEdit'
 
 const EMAIL = 'Fauzein123@gmail.com'
