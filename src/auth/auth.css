@@ -1,0 +1,427 @@
+/* Gaya bersama untuk halaman Masuk, Daftar, dan OTP
+   Ukuran & warna mengikuti frame Figma (kartu 442px, input 372x44) */
+
+:root {
+  --hijau: #4caf50;
+  --hijau-garis: rgba(76, 175, 80, 0.4);
+  --latar: #f1f8e9;
+  --kartu: #fafafa;
+  --teks: #000000;
+  --abu: rgba(0, 0, 0, 0.5);
+  --merah: #e33629;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: var(--teks);
+  background: var(--latar);
+}
+
+a {
+  color: var(--hijau);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Tata letak halaman ===== */
+
+/* Halaman Masuk & OTP: ilustrasi besar di tengah, kartu di atasnya */
+.auth-tengah {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: url('/img/ilustrasi-login.webp') center / min(1028px, 110vw) no-repeat, var(--latar);
+}
+
+/* Halaman Daftar: logo / ilustrasi di kiri, kartu di kanan */
+.auth-dua {
+  min-height: 100vh;
+  max-width: 1184px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 24px 60px;
+}
+
+.auth-kiri {
+  display: flex;
+  justify-content: center;
+}
+
+.auth-kiri img {
+  width: 100%;
+  max-width: 340px;
+}
+
+/* Logo besar halaman daftar */
+.auth-kiri .logo-besar {
+  max-width: 320px;
+}
+
+/* Efek cat hijau di belakang kartu (pengganti gambar kuas di Figma) */
+.auth-kanan {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.auth-kanan::before {
+  content: '';
+  position: absolute;
+  inset: 0 -20px;
+  background:
+    radial-gradient(ellipse 45% 40% at 30% 40%, rgba(129, 199, 160, 0.55), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 70% 60%, rgba(129, 199, 160, 0.5), transparent 70%),
+    radial-gradient(ellipse 60% 55% at 50% 50%, rgba(165, 214, 190, 0.45), transparent 75%);
+  filter: blur(6px);
+  z-index: 0;
+}
+
+/* ===== Kartu form ===== */
+.auth-kartu {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 442px;
+  background: var(--kartu);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 23px 34px 30px;
+}
+
+.auth-judul {
+  margin: 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.auth-sub {
+  margin: 4px 0 20px;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* ===== Input ===== */
+.field {
+  margin-bottom: 10px;
+}
+
+.input-wadah {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid var(--hijau);
+  border-radius: 10px;
+  background: #fff;
+  padding: 0 44px 0 20px;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--abu);
+}
+
+.input:focus {
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.input.salah {
+  border-color: var(--merah);
+}
+
+/* Tombol mata untuk lihat / sembunyikan password */
+.btn-mata {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+
+.btn-mata svg {
+  width: 22px;
+  height: 22px;
+}
+
+.petunjuk {
+  margin: 6px 0 0;
+  font-size: 12px;
+}
+
+.pesan-salah {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--merah);
+}
+
+/* ===== Tombol ===== */
+.btn-utama {
+  width: 100%;
+  height: 41px;
+  margin-top: 20px;
+  border: 1px solid var(--hijau);
+  border-radius: 10px;
+  background: var(--kartu);
+  color: var(--hijau);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-utama:hover:not(:disabled) {
+  background: var(--hijau);
+  color: #fff;
+}
+
+.btn-utama:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-sosial {
+  width: 100%;
+  height: 41px;
+  margin-top: 10px;
+  border: 1px solid var(--hijau);
+  border-radius: 10px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-sosial:hover {
+  background: #fff;
+}
+
+.btn-sosial svg {
+  width: 16px;
+  height: 16px;
+}
+
+.link-tengah {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Garis "atau" */
+.atau {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 10px;
+  color: var(--hijau);
+  font-size: 14px;
+}
+
+.atau::before,
+.atau::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--hijau-garis);
+}
+
+.syarat {
+  margin: 22px 0 0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* ===== OTP ===== */
+.otp-kotak {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 30px 0 50px;
+}
+
+.otp-kotak input {
+  width: 69px;
+  height: 78px;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  background: var(--kartu);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font: inherit;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--hijau);
+  outline: none;
+}
+
+.otp-kotak input:focus {
+  border-color: var(--hijau);
+}
+
+.kirim-ulang {
+  text-align: center;
+  font-size: 12px;
+  margin: 0;
+}
+
+.kirim-ulang button {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: var(--hijau);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ===== Notifikasi kecil (toast) ===== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  background: #1e1e1e;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 50;
+}
+
+/* Tombol kembali ke beranda di pojok kiri atas */
+.kembali {
+  position: fixed;
+  top: 16px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #1e1e1e;
+  z-index: 5;
+}
+
+.kembali img {
+  width: 36px;
+}
+
+/* ===== Layar kecil (HP) ===== */
+@media (max-width: 800px) {
+  .auth-dua {
+    grid-template-columns: 1fr;
+    padding: 70px 16px 24px;
+    gap: 0;
+  }
+
+  .auth-kiri img {
+    max-width: 200px;
+  }
+
+  .auth-kartu {
+    padding: 20px 18px 24px;
+  }
+
+  .otp-kotak input {
+    width: 56px;
+    height: 64px;
+    font-size: 26px;
+  }
+}
+
+/* ===== Lupa Password ===== */
+.auth-sub.kutip {
+  max-width: 290px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8px;
+  margin-bottom: 26px;
+}
+
+.link-tengah.ingat {
+  margin: 26px 0 0;
+  color: #000;
+  font-weight: 600;
+}
+
+/* Pop-up (kotak putih bergaris hijau di tengah layar) */
+.popup-latar {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.popup {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  border: 3px solid var(--hijau);
+  border-radius: 20px;
+  padding: 36px 40px 34px;
+  text-align: center;
+  animation: muncul 0.25s ease-out;
+}
+
+@keyframes muncul {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+.popup h2 {
+  margin: 18px 0 10px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.popup h2 span {
+  color: var(--hijau);
+}
+
+.popup p {
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.popup-btn {
+  display: grid;
+  place-items: center;
+  text-decoration: none !important;
+}

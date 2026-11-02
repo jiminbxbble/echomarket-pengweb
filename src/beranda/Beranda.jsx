@@ -1,9 +1,14 @@
 // Halaman Beranda EchoMarket.
-// Halaman dibagi menjadi 3 bagian (komponen), urutannya dari atas ke bawah:
-// Navbar -> Hero (banner) -> Kategori
+// Halaman dibagi menjadi beberapa bagian (komponen), urutannya dari atas ke bawah:
+// Navbar -> Hero (banner) -> Kategori -> Gabung (EchoJualan & Echomunitas)
+// -> Produk trending -> EchoTutor -> Footer
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Kategori from './components/Kategori'
+import GabungEcho from './components/GabungEcho'
+import ProdukTrending from './components/ProdukTrending'
+import EchoTutor from './components/EchoTutor'
+import Footer from './components/Footer'
 
 export default function Beranda() {
   return (
@@ -12,6 +17,10 @@ export default function Beranda() {
       <Navbar />
       <Hero />
       <Kategori />
+      <GabungEcho />
+      <ProdukTrending />
+      <EchoTutor />
+      <Footer />
     </div>
   )
 }
