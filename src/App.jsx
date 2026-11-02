@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import ProfileForm from './components/ProfileForm'
+import BuyPage from './BuyPage'
 import AddressPage from "./components/AddressPage";
 
 const INITIAL_PROFILE = {
@@ -35,6 +36,7 @@ export default function App() {
   return (
     <>
       <Navbar />
+      <BuyPage />
       <div className="wrap">
         <Sidebar
           name={profile.nama || 'Fauzein'}
