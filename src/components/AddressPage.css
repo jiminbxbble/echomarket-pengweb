@@ -1,0 +1,360 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+/* Page alamat, kartu besar seperti halaman Profil. Warna ikut index.css (terang/gelap) */
+.em-page {
+  --em-green: var(--green, #4caf50);
+  --em-green-dark: var(--green-d, #2e7d32);
+  --em-line: var(--border, #6cc070);
+  --em-card: var(--card, #fafafa);
+  --em-field: var(--field, #fff);
+  --em-text: var(--text, #111);
+  --em-muted: var(--muted, #777);
+  --em-danger: #e53935;
+
+  flex: 1;
+  min-width: 300px;
+  container-type: inline-size;
+  background: var(--em-card);
+  border-radius: 24px;
+  padding: 22px 28px 40px;
+  box-shadow: 0 4px 10px var(--shadow, rgba(0, 0, 0, 0.12));
+  color: var(--em-text);
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 14px;
+  text-align: left;
+}
+.em-page *,
+.em-page *::before,
+.em-page *::after {
+  box-sizing: border-box;
+}
+.em-page h1 {
+  margin: 0;
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--em-text);
+}
+.em-page .em-sub {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--em-muted);
+}
+.em-page .em-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+/* ---------- Tombol ---------- */
+.em-page .em-btn,
+.em-page .em-btn-o {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.em-page .em-btn {
+  color: #fff;
+  background: var(--em-green);
+  border: 1px solid var(--em-green);
+}
+.em-page .em-btn:hover {
+  background: var(--em-green-dark);
+}
+.em-page .em-btn-o {
+  color: var(--em-text);
+  background: transparent;
+  border: 1px solid var(--em-green);
+}
+.em-page .em-btn-o:hover {
+  background: rgba(76, 175, 80, 0.12);
+}
+.em-page .em-btn:focus-visible,
+.em-page .em-btn-o:focus-visible,
+.em-page .em-link:focus-visible,
+.em-page .em-back:focus-visible {
+  outline: 2px solid var(--em-green-dark);
+  outline-offset: 2px;
+}
+.em-page .em-link,
+.em-page .em-back {
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.em-page .em-link {
+  color: var(--em-green);
+  text-decoration: underline;
+}
+.em-page .em-link.em-danger {
+  color: var(--em-danger);
+}
+.em-page .em-back {
+  margin-bottom: 12px;
+  color: var(--em-muted);
+}
+.em-page .em-back:hover {
+  color: var(--em-text);
+}
+
+/* ---------- Notifikasi ---------- */
+.em-page .em-success {
+  margin: 0 0 16px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: #fff;
+  background: var(--em-green-dark);
+  border-radius: 6px;
+}
+
+/* ---------- Page 1 (kosong & daftar) ---------- */
+.em-page .em-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 16px 24px;
+  color: var(--em-muted);
+  text-align: center;
+}
+.em-page .em-empty p {
+  margin: 0;
+}
+.em-page .em-empty .em-empty-title {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--em-text);
+}
+.em-page .em-empty .em-btn {
+  margin-top: 20px;
+}
+.em-page .em-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.em-page .em-item {
+  padding: 16px 18px;
+  background: var(--em-field);
+  border: 1px solid var(--em-line);
+  border-radius: 12px;
+}
+.em-page .em-item p {
+  margin: 0;
+}
+.em-page .em-item-top {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.em-page .em-badge {
+  padding: 2px 10px;
+  font-size: 11px;
+  border: 1px solid var(--em-line);
+  border-radius: 999px;
+}
+.em-page .em-badge-utama {
+  color: #fff;
+  background: var(--em-green);
+  border-color: var(--em-green);
+}
+.em-page .em-who {
+  font-size: 13px;
+}
+.em-page .em-where {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--em-muted);
+}
+.em-page .em-item-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+/* ---------- Page 2 (form + peta) ---------- */
+.em-page .em-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  margin-top: 20px;
+}
+.em-page .em-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+  margin-top: 14px;
+}
+.em-page .em-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.em-page .em-wide {
+  grid-column: 1 / -1;
+}
+.em-page .em-field label {
+  font-size: 12px;
+  font-weight: 500;
+}
+.em-page .em-field input,
+.em-page .em-field select {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--em-text);
+  background: var(--em-field);
+  border: 1px solid var(--em-line);
+  border-radius: 8px;
+  outline: 0;
+}
+.em-page .em-field select {
+  cursor: pointer;
+}
+.em-page .em-field input:focus,
+.em-page .em-field select:focus {
+  border-color: var(--em-green-dark);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
+}
+.em-page .em-field select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.em-page .em-api-error {
+  margin: 14px 0 0;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--em-danger);
+  border: 1px solid var(--em-danger);
+  border-radius: 6px;
+}
+.em-page .em-has-error input,
+.em-page .em-has-error select {
+  border-color: var(--em-danger);
+}
+.em-page .em-field small {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--em-danger);
+}
+.em-page .em-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.em-page .em-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Toggle "Jadikan Alamat Utama" */
+.em-page .em-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.em-page .em-switch input {
+  position: absolute;
+  opacity: 0;
+}
+.em-page .em-track {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 16px;
+  background: var(--em-field);
+  border: 1px solid var(--em-text);
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.em-page .em-track::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  background: var(--em-text);
+  border-radius: 50%;
+  transition: transform 0.2s, background 0.2s;
+}
+.em-page .em-switch input:checked + .em-track {
+  background: var(--em-green);
+  border-color: var(--em-green-dark);
+}
+.em-page .em-switch input:checked + .em-track::after {
+  background: #fff;
+  transform: translateX(16px);
+}
+.em-page .em-switch input:disabled + .em-track {
+  opacity: 0.6;
+}
+.em-page .em-switch input:focus-visible + .em-track {
+  outline: 2px solid var(--em-green-dark);
+  outline-offset: 2px;
+}
+
+/* Peta untuk alamat */
+.em-page .em-map {
+  overflow: hidden;
+  background: var(--em-field);
+  border: 1px solid var(--em-line);
+  border-radius: 12px;
+}
+.em-page .em-map iframe {
+  display: block;
+  width: 100%;
+  height: 260px;
+  border: 0;
+}
+.em-page .em-preview {
+  padding: 12px 16px 14px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.em-page .em-preview p {
+  margin: 0;
+}
+
+/* ---------- Responsif ---------- */
+@container (max-width: 680px) {
+  .em-page .em-layout {
+    grid-template-columns: 1fr;
+  }
+}
+@container (max-width: 440px) {
+  .em-page .em-grid {
+    grid-template-columns: 1fr;
+  }
+  .em-page .em-actions,
+  .em-page .em-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
