@@ -9,7 +9,6 @@
   --em-text: var(--text, #1c1c1c);
   --em-danger: #e53935;
 
-  /* mengisi ruang di samping Sidebar, seperti ProfileForm */
   flex: 1;
   min-width: 300px;
   color: var(--em-text);

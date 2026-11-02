@@ -18,7 +18,7 @@ const INITIAL_PROFILE = {
 export default function App() {
   const [profile, setProfile] = useState(INITIAL_PROFILE)
   const [toast, setToast] = useState('')
-  const [page, setPage] = useState('profil') // halaman yang sedang dibuka: 'profil' atau 'alamat'
+  const [page, setPage] = useState('profil')
   const timer = useRef(null)
   const namaRef = useRef(null)
 
