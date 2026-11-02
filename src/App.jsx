@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import ProfileForm from './components/ProfileForm'
 import BuyPage from './BuyPage'
+import AddressPage from "./components/AddressPage";
 
 const INITIAL_PROFILE = {
   username: 'Tamu10',
@@ -17,6 +18,7 @@ const INITIAL_PROFILE = {
 export default function App() {
   const [profile, setProfile] = useState(INITIAL_PROFILE)
   const [toast, setToast] = useState('')
+  const [page, setPage] = useState('profil') // halaman yang sedang dibuka: 'profil' atau 'alamat'
   const timer = useRef(null)
   const namaRef = useRef(null)
 
@@ -35,6 +37,23 @@ export default function App() {
     <>
       <Navbar />
       <BuyPage />
+      <div className="wrap">
+        <Sidebar
+          name={profile.nama || 'Fauzein'}
+          photo={profile.photo}
+          onEditProfile={() => {
+            setPage('profil')
+            setTimeout(() => namaRef.current?.focus(), 0)
+          }}
+          page={page}
+          onNavigate={setPage}
+        />
+        {page === 'profil' && (
+          <ProfileForm profile={profile} onSave={handleSave} onNotify={notify} namaRef={namaRef} />
+        )}
+        {page === 'alamat' && <AddressPage />}
+      </div>
+      <div id="toast" className={toast ? 'show' : ''}>{toast}</div>
     </>
   )
 }
