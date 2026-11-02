@@ -1,4 +1,4 @@
-/* Isi container utama */
+
 .payment-page-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -184,7 +184,6 @@
   background-color: #0056b3;
 }
 
-/* Responsivitas untuk layar kecil */
 @media (max-width: 768px) {
   .payment-content {
     flex-direction: column;

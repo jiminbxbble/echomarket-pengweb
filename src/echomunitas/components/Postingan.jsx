@@ -1,5 +1,4 @@
-// Satu kartu postingan: penulis, teks, foto, tombol suka/komentar/bagikan,
-// dan daftar komentar yang bisa dibuka-tutup
+
 import { useState } from 'react'
 import Ikon from './Ikon'
 import { pengguna, singkat } from '../data/data'
@@ -20,9 +19,7 @@ export default function Postingan({ post, onUbah, onToast }) {
     onUbah({ ...post, dibagikan: post.dibagikan + 1 })
     try {
       navigator.clipboard?.writeText(window.location.href)
-    } catch {
-      /* abaikan */
-    }
+    } catch {}
     onToast('Link postingan disalin')
   }
 
@@ -50,7 +47,6 @@ export default function Postingan({ post, onUbah, onToast }) {
         )}
       </p>
 
-      {/* 1 gambar = lebar penuh, lebih dari 1 = grid */}
       {post.gambar.length === 1 && <img className="em-post-foto" src={post.gambar[0]} alt="" />}
       {post.gambar.length > 1 && (
         <div className="em-post-grid">

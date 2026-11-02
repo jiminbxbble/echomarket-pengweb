@@ -1,4 +1,4 @@
-// Kumpulan ikon SVG kecil yang dipakai di halaman Echomunitas
+
 const dasar = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' }
 
 const PATH = {

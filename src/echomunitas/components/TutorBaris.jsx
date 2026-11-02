@@ -1,4 +1,4 @@
-// Kotak EchoTutor berisi video tutorial yang bisa digeser ke samping
+
 import Ikon from './Ikon'
 import { tutorKomunitas } from '../data/data'
 

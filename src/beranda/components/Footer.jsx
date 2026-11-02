@@ -1,15 +1,14 @@
-// Komponen Footer
-// Bagian paling bawah: info EchoMarket, navigasi, kategori, sosial media, download app
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-grid">
         <div>
-          <a className="footer-logo" href="/beranda.html">
+          <Link className="footer-logo" to="/">
             <span><img src="/img/logo-ikon.png" alt="" /></span>
             EchoMarket
-          </a>
+          </Link>
           <p>Bergabung &amp; Jelajahi Dunia EchoMarket untuk masa depan yang lebih hijau dan berkelanjutan</p>
 
           <div className="footer-stat">
@@ -20,7 +19,7 @@ export default function Footer() {
 
           <h4>Selamatkan Bumi !!</h4>
           <p>Ubah barang bekasmu menjadi berharga untuk selamatkan bumi</p>
-          <a href="/daftar.html" className="fitur-btn footer-btn">Gabung Sekarang</a>
+          <Link to="/daftar" className="fitur-btn footer-btn">Gabung Sekarang</Link>
 
           <div className="lencana">
             <span>♻ Zero Waste</span>
@@ -30,8 +29,8 @@ export default function Footer() {
 
         <div>
           <h4>Navigasi</h4>
-          <a href="/beranda.html">Beranda</a>
-          <a href="/echomunitas.html">Echomunitas</a>
+          <Link to="/">Beranda</Link>
+          <Link to="/echomunitas">Echomunitas</Link>
           <a href="#gabung">EchoJualan</a>
           <a href="#">Tentang kami</a>
 

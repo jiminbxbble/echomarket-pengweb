@@ -1,5 +1,4 @@
-// Komponen ProdukTrending
-// 4 kartu produk: foto, nama, harga, dan rating bintang
+import { Link } from 'react-router-dom'
 import { produkTrending, rupiah } from '../data/produk'
 
 export default function ProdukTrending() {
@@ -9,7 +8,7 @@ export default function ProdukTrending() {
 
       <div className="produk-grid">
         {produkTrending.map((p) => (
-          <a key={p.id} href="#" className="produk-kartu">
+          <Link key={p.id} to="/produk" className="produk-kartu">
             <img src={p.gambar} alt={p.nama} />
             <div className="produk-info">
               <p className="produk-nama">{p.nama}</p>
@@ -18,7 +17,7 @@ export default function ProdukTrending() {
                 <span aria-hidden="true">★</span> {p.rating}
               </p>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

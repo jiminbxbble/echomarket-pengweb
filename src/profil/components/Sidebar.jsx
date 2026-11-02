@@ -1,11 +1,12 @@
-import Avatar from './Avatar'
-import Icon from './Icon'
+import { useNavigate } from 'react-router-dom'
+import Avatar from '../../components/Avatar'
+import Icon from '../../components/Icon'
 
 const MENU = [
   { icon: 'user', label: 'Akun saya', page: 'profil' },
   { icon: 'bank', label: 'Bank' },
   { icon: 'pin', label: 'Alamat', page: 'alamat' },
-  { icon: 'cart', label: 'Keranjang saya', href: '/keranjang.html' },
+  { icon: 'cart', label: 'Keranjang saya', href: '/keranjang' },
   { icon: 'bell', label: 'Pengataturan Notifikasi' },
   { icon: 'lock', label: 'Pengataturan Privasi' },
   { icon: 'box', label: 'Pesanan saya' },
@@ -13,6 +14,8 @@ const MENU = [
 ]
 
 export default function Sidebar({ name, photo, onEditProfile, page, onNavigate }) {
+  const navigate = useNavigate()
+
   return (
     <aside>
       <div className="me">
@@ -32,7 +35,7 @@ export default function Sidebar({ name, photo, onEditProfile, page, onNavigate }
             className={m.page === page ? 'on' : ''}
             onClick={() => {
               if (m.href) {
-                window.location.href = m.href
+                navigate(m.href)
               } else if (m.page) {
                 onNavigate(m.page)
               }

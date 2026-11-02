@@ -59,17 +59,14 @@ export default function AddressPage() {
   const [notice, setNotice] = useState("");
   const [mapQuery, setMapQuery] = useState(DEFAULT_MAP);
 
-  // Region State
   const [regions, setRegions] = useState({ provinsi: [], kota: [], kecamatan: [], kelurahan: [] });
   const [loadingLevel, setLoadingLevel] = useState(""); 
   const [apiError, setApiError] = useState(false);
 
-  // Simpan data ke memori browser tiap kali `addresses` berubah
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(addresses));
   }, [addresses]);
 
-  // Hilangkan pesan sukses dalam 3 detik
   useEffect(() => {
     if (notice) {
       const timer = setTimeout(() => setNotice(""), 3000);
@@ -77,7 +74,6 @@ export default function AddressPage() {
     }
   }, [notice]);
 
-  // Fungsi helper untuk mengambil nama wilayah berdasarkan ID yang dipilih
   const getRegionName = (levelName) => {
     const regionData = regions[levelName].find((r) => r.id === form[levelName]);
     return regionData ? titleCase(regionData.name) : "";
@@ -88,7 +84,6 @@ export default function AddressPage() {
   const namaKecamatan = getRegionName("kecamatan");
   const namaKelurahan = getRegionName("kelurahan");
 
-  // Update Peta Otomatis
   useEffect(() => {
     const textPeta = [form.jalan, namaKelurahan, namaKecamatan, namaKota, namaProvinsi]
       .filter((s) => s.trim() !== "")
@@ -100,7 +95,6 @@ export default function AddressPage() {
     }
   }, [form.jalan, namaKelurahan, namaKecamatan, namaKota, namaProvinsi]);
 
-  // API Wilayah Indonesia
   const loadRegion = async (level, path) => {
     setLoadingLevel(level);
     setApiError(false);
@@ -118,12 +112,10 @@ export default function AddressPage() {
     }
   };
 
-  // if/else saat dropdown wilayah diubah
   const pickRegion = (levelName, id) => {
     let nextForm = { ...form, [levelName]: id };
     let nextRegions = { ...regions };
 
-    // Reset wilayah yang lebih rendah saat wilayah yang lebih tinggi dipilih
     if (levelName === "provinsi") {
       nextForm.kota = ""; nextForm.kecamatan = ""; nextForm.kelurahan = "";
       nextRegions.kota = []; nextRegions.kecamatan = []; nextRegions.kelurahan = [];
@@ -155,7 +147,6 @@ export default function AddressPage() {
     return false;
   };
 
-  // form handler
   const handleChange = (name, value) => {
     setForm({ ...form, [name]: value });
     if (touched[name]) {
@@ -173,15 +164,13 @@ export default function AddressPage() {
     const currentErrors = validate(form);
     setErrors(currentErrors);
     
-    // Tandai field yg telah disentuh
     const allTouched = {};
     FIELDS.forEach((f) => { allTouched[f.name] = true; });
     setTouched(allTouched);
 
     const adaError = Object.keys(currentErrors).length > 0;
-    if (adaError) return; // Jika error, batalkan simpan
+    if (adaError) return; 
 
-    // Persiapan data alamat baru
     const newAddress = { 
       ...form, 
       namaProvinsi, namaKota, namaKecamatan, namaKelurahan,
@@ -191,7 +180,7 @@ export default function AddressPage() {
 
     setAddresses((prevAddresses) => {
       let updatedAddresses = [...prevAddresses];
-      // Jika alamat ini diset "utama", alamat lama diubah agar tidak utama lagi
+      
       if (newAddress.utama) {
         updatedAddresses = updatedAddresses.map((a) => ({ ...a, utama: false }));
       }
@@ -203,7 +192,6 @@ export default function AddressPage() {
     setView("list");
   };
 
-  // list alamat handler
   const openForm = () => {
     setForm(EMPTY_FORM);
     setErrors({});
@@ -224,7 +212,7 @@ export default function AddressPage() {
     
     setAddresses((prev) => {
       const sisa = prev.filter((a) => a.id !== id);
-      // Jika alamat yang tersisa tidak ada yang utama, jadikan yang pertama sebagai utama
+      
       if (sisa.length > 0 && !sisa.some((a) => a.utama)) {
         sisa[0].utama = true;
       }
@@ -232,10 +220,8 @@ export default function AddressPage() {
     });
   };
 
-  // Alamat utama ditaruh paling atas
   const sortedAddresses = [...addresses].sort((a, b) => (a.utama === b.utama ? 0 : a.utama ? -1 : 1));
 
-  // render (halaman form)
   if (view === "form") {
     return (
       <div className="em-page">
@@ -342,7 +328,6 @@ export default function AddressPage() {
     );
   }
 
-  // render (halaman list)
   return (
     <div className="em-page">
       <div className="em-head">

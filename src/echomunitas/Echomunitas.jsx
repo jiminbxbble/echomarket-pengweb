@@ -1,5 +1,4 @@
-// Halaman Echomunitas (komunitas EchoMarket) – frame "Community" di Figma
-// Susunan: Header di atas, lalu 3 kolom: Menu kiri | Feed | Tantangan
+
 import { useState } from 'react'
 import Header from './components/Header'
 import MenuKiri from './components/MenuKiri'
@@ -9,8 +8,8 @@ import TutorBaris from './components/TutorBaris'
 import Postingan from './components/Postingan'
 import Tantangan from './components/Tantangan'
 import { pengguna, postinganAwal, misiAwal } from './data/data'
+import './echomunitas.css'
 
-// Tambah progres misi dengan id tertentu (dipakai saat posting / komentar)
 function tambahProgres(misi, ids) {
   const ubah = (list) => list.map((m) => (ids.includes(m.id) && m.progres < m.target ? { ...m, progres: m.progres + 1 } : m))
   return { harian: ubah(misi.harian), mingguan: ubah(misi.mingguan) }
@@ -28,7 +27,6 @@ export default function Echomunitas() {
     setTimeout(() => setToast(''), 2200)
   }
 
-  // Postingan baru masuk paling atas + misi "Berbagi di Echomunitas" bertambah
   function kirimPost({ teks, gambar }) {
     const baru = {
       id: Date.now(),
@@ -57,7 +55,6 @@ export default function Echomunitas() {
     tampilkan('🎉 Voucher Diskon Rp 5.000 masuk ke Voucher saya')
   }
 
-  // Filter postingan sesuai kata di kolom pencarian
   const kata = cari.trim().toLowerCase()
   const tampil = kata
     ? posts.filter((p) => p.teks.toLowerCase().includes(kata) || p.nama.toLowerCase().includes(kata))

@@ -1,4 +1,4 @@
-// Kotak "Apa yang anda pikirkan hari ini?" + jendela (modal) Buat Postingan
+
 import { useRef, useState } from 'react'
 import Ikon from './Ikon'
 import { pengguna } from '../data/data'
@@ -9,7 +9,6 @@ export default function BuatPostingan({ onKirim }) {
   const [gambar, setGambar] = useState([])
   const fileRef = useRef(null)
 
-  // Pilih foto/video dari komputer, tampilkan pratinjaunya
   function pilihFile(e) {
     const files = [...e.target.files].slice(0, 4)
     setGambar(files.map((f) => URL.createObjectURL(f)))

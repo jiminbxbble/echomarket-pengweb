@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 import './PaymentPage.css';
 
 const PaymentPage = () => {
+  const navigate = useNavigate();
   const [selectedPayment, setSelectedPayment] = useState('');
 
   const handlePaymentSelect = (method) => {
@@ -14,13 +17,15 @@ const PaymentPage = () => {
       return;
     }
     alert(`Pesanan berhasil dibuat dengan metode: ${selectedPayment}`);
+    navigate('/');
   };
 
   return (
-    <div className="payment-page-container">
+    <>
+      <Navbar />
+      <div className="payment-page-container">
       <div className="payment-content">
         
-        {/* Kolom Kiri: Detail Pengiriman & Pesanan */}
         <div className="payment-left-column">
           <section className="payment-section">
             <h2>Alamat Pengiriman</h2>
@@ -29,7 +34,7 @@ const PaymentPage = () => {
               <p>Jl. Telekomunikasi No. 1, Terusan Buahbatu</p>
               <p>Bandung, Jawa Barat, 40257</p>
               <p>0812-XXXX-XXXX</p>
-              <button className="btn-edit-address">Ubah Alamat</button>
+              <button className="btn-edit-address" onClick={() => navigate('/profil')}>Ubah Alamat</button>
             </div>
           </section>
 
@@ -68,7 +73,6 @@ const PaymentPage = () => {
           </section>
         </div>
 
-        {/* Kolom Kanan: Ringkasan Belanja */}
         <div className="payment-right-column">
           <section className="summary-card">
             <h2>Ringkasan Belanja</h2>
@@ -110,6 +114,7 @@ const PaymentPage = () => {
 
       </div>
     </div>
+    </>
   );
 };
 

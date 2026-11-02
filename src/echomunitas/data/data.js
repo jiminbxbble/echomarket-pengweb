@@ -1,4 +1,3 @@
-// Data dummy halaman Echomunitas (belum dari database)
 
 export const pengguna = { nama: 'Fauzein', avatar: '/img/avatar-saya.webp' }
 
@@ -65,7 +64,6 @@ export const misiAwal = {
   ],
 }
 
-// 1000 -> "1K"
 export function singkat(angka) {
   return angka >= 1000 ? (angka / 1000).toFixed(angka % 1000 === 0 ? 0 : 1) + 'K' : String(angka)
 }

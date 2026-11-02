@@ -1,5 +1,3 @@
-/* Gaya bersama untuk halaman Masuk, Daftar, dan OTP
-   Ukuran & warna mengikuti frame Figma (kartu 442px, input 372x44) */
 
 :root {
   --hijau: #4caf50;
@@ -31,9 +29,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ===== Tata letak halaman ===== */
-
-/* Halaman Masuk & OTP: ilustrasi besar di tengah, kartu di atasnya */
 .auth-tengah {
   min-height: 100vh;
   display: grid;
@@ -42,7 +37,6 @@ a:hover {
   background: url('/img/ilustrasi-login.webp') center / min(1028px, 110vw) no-repeat, var(--latar);
 }
 
-/* Halaman Daftar: logo / ilustrasi di kiri, kartu di kanan */
 .auth-dua {
   min-height: 100vh;
   max-width: 1184px;
@@ -64,12 +58,10 @@ a:hover {
   max-width: 340px;
 }
 
-/* Logo besar halaman daftar */
 .auth-kiri .logo-besar {
   max-width: 320px;
 }
 
-/* Efek cat hijau di belakang kartu (pengganti gambar kuas di Figma) */
 .auth-kanan {
   position: relative;
   display: flex;
@@ -89,7 +81,6 @@ a:hover {
   z-index: 0;
 }
 
-/* ===== Kartu form ===== */
 .auth-kartu {
   position: relative;
   z-index: 1;
@@ -114,7 +105,6 @@ a:hover {
   font-size: 12px;
 }
 
-/* ===== Input ===== */
 .field {
   margin-bottom: 10px;
 }
@@ -147,7 +137,6 @@ a:hover {
   border-color: var(--merah);
 }
 
-/* Tombol mata untuk lihat / sembunyikan password */
 .btn-mata {
   position: absolute;
   right: 12px;
@@ -176,7 +165,6 @@ a:hover {
   color: var(--merah);
 }
 
-/* ===== Tombol ===== */
 .btn-utama {
   width: 100%;
   height: 41px;
@@ -237,7 +225,6 @@ a:hover {
   font-weight: 500;
 }
 
-/* Garis "atau" */
 .atau {
   display: flex;
   align-items: center;
@@ -262,7 +249,6 @@ a:hover {
   line-height: 1.6;
 }
 
-/* ===== OTP ===== */
 .otp-kotak {
   display: flex;
   justify-content: center;
@@ -305,7 +291,6 @@ a:hover {
   font-weight: 600;
 }
 
-/* ===== Notifikasi kecil (toast) ===== */
 .toast {
   position: fixed;
   left: 50%;
@@ -319,7 +304,6 @@ a:hover {
   z-index: 50;
 }
 
-/* Tombol kembali ke beranda di pojok kiri atas */
 .kembali {
   position: fixed;
   top: 16px;
@@ -336,7 +320,6 @@ a:hover {
   width: 36px;
 }
 
-/* ===== Layar kecil (HP) ===== */
 @media (max-width: 800px) {
   .auth-dua {
     grid-template-columns: 1fr;
@@ -359,7 +342,6 @@ a:hover {
   }
 }
 
-/* ===== Lupa Password ===== */
 .auth-sub.kutip {
   max-width: 290px;
   margin-left: auto;
@@ -374,7 +356,6 @@ a:hover {
   font-weight: 600;
 }
 
-/* Pop-up (kotak putih bergaris hijau di tengah layar) */
 .popup-latar {
   position: fixed;
   inset: 0;

@@ -1,9 +1,11 @@
-// Halaman Daftar (Register) – frame "Signup page" lalu "Daftar" di Figma
-// Langkah 1: isi email. Langkah 2: buat password. Setelah itu pindah ke halaman OTP.
+
 import { useState } from 'react'
-import { InputPassword, TombolSosial, Kembali, Toast, emailValid, simpan } from '../auth/components/Bagian'
+import { Link, useNavigate } from 'react-router-dom'
+import { InputPassword, TombolSosial, Kembali, Toast, emailValid, simpan } from '../components/Bagian'
+import '../auth.css'
 
 export default function Daftar() {
+  const navigate = useNavigate()
   const [langkah, setLangkah] = useState(1)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -16,7 +18,6 @@ export default function Daftar() {
     setTimeout(() => setToast(''), 2200)
   }
 
-  // Langkah 1 -> cek email
   function kirimEmail(e) {
     e.preventDefault()
     if (!emailValid(email)) {
@@ -27,7 +28,6 @@ export default function Daftar() {
     setLangkah(2)
   }
 
-  // Langkah 2 -> cek password, lalu ke halaman OTP
   function kirimPassword(e) {
     e.preventDefault()
     const err = {}
@@ -35,8 +35,8 @@ export default function Daftar() {
     if (konfirmasi !== password) err.konfirmasi = 'Konfirmasi password tidak sama'
     setError(err)
     if (Object.keys(err).length === 0) {
-      simpan('email-daftar', email) // ditampilkan di halaman OTP
-      window.location.href = '/otp.html'
+      simpan('email-daftar', email) 
+      navigate('/otp')
     }
   }
 
@@ -44,7 +44,6 @@ export default function Daftar() {
     <main className="auth-dua">
       <Kembali />
 
-      {/* Kiri: logo (langkah 1) atau ilustrasi (langkah 2) */}
       <div className="auth-kiri">
         {langkah === 1 ? (
           <img className="logo-besar" src="/img/logo.png" alt="Logo EchoMarket" />
@@ -58,7 +57,7 @@ export default function Daftar() {
           <form className="auth-kartu" onSubmit={kirimEmail} noValidate>
             <h1 className="auth-judul">Daftar sekarang</h1>
             <p className="auth-sub">
-              Sudah punya akun Echomarket? <a href="/masuk.html">Masuk</a>
+              Sudah punya akun Echomarket? <Link to="/masuk">Masuk</Link>
             </p>
 
             <TombolSosial onKlik={(nama) => tampilkan(`Daftar dengan ${nama} belum tersedia`)} />
