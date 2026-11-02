@@ -1,11 +1,11 @@
-// Menu samping kiri halaman Echomunitas
+import { Link } from 'react-router-dom'
 import Ikon from './Ikon'
 
 const MENU = [
-  { label: 'Jelajahi barang', ikon: 'toko', href: '/beranda.html#produk' },
-  { label: 'Echomunitas', ikon: 'dunia', href: '/echomunitas.html', aktif: true },
-  { label: 'Echojualan', ikon: 'troli', href: '/beranda.html#gabung' },
-  { label: 'Daftar sebagai penjual', ikon: 'daftarToko', href: '/daftar.html' },
+  { label: 'Jelajahi barang', ikon: 'toko', href: '/#produk' },
+  { label: 'Echomunitas', ikon: 'dunia', href: '/echomunitas', aktif: true },
+  { label: 'Echojualan', ikon: 'troli', href: '/#gabung' },
+  { label: 'Daftar sebagai penjual', ikon: 'daftarToko', href: '/daftar' },
 ]
 
 export default function MenuKiri() {
@@ -14,10 +14,17 @@ export default function MenuKiri() {
       <h2>Echomunitas</h2>
       <nav>
         {MENU.map((m) => (
-          <a key={m.label} href={m.href} className={m.aktif ? 'aktif' : ''}>
-            <Ikon nama={m.ikon} />
-            {m.label}
-          </a>
+          m.href.includes('#') ? (
+            <a key={m.label} href={m.href} className={m.aktif ? 'aktif' : ''}>
+              <Ikon nama={m.ikon} />
+              {m.label}
+            </a>
+          ) : (
+            <Link key={m.label} to={m.href} className={m.aktif ? 'aktif' : ''}>
+              <Ikon nama={m.ikon} />
+              {m.label}
+            </Link>
+          )
         ))}
       </nav>
     </aside>

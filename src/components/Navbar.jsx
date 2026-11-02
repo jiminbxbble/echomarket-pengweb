@@ -1,26 +1,27 @@
+import { Link } from 'react-router-dom'
 import Icon from './Icon'
 
 export default function Navbar() {
   return (
     <header>
-      <a href="/beranda.html" className="logo" style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link to="/" className="logo" style={{ textDecoration: 'none', color: 'inherit' }}>
         <Icon name="cart" size={34} color="var(--green-d)" />
         EchoMarket
-      </a>
+      </Link>
       <div className="search">
         <Icon name="search" />
         <input placeholder="Pencarian" />
       </div>
       <div className="icons">
-        <a href="/keranjang.html" title="Keranjang" style={{ color: 'inherit', display: 'flex', textDecoration: 'none' }}>
+        <Link to="/keranjang" title="Keranjang" style={{ color: 'inherit', display: 'flex', textDecoration: 'none' }}>
           <Icon name="basket" />
-        </a>
+        </Link>
         <Icon name="bell" color="#f5b301" />
         <Icon name="chat" color="var(--green)" />
         <Icon name="heart" color="#e53935" />
-        <a href="/" title="Profil Saya" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Link to="/profil" title="Profil Saya" style={{ textDecoration: 'none', color: 'inherit' }}>
           <div className="av-s">M K</div>
-        </a>
+        </Link>
       </div>
     </header>
   )

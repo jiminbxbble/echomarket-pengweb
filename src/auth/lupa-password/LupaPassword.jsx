@@ -1,10 +1,9 @@
-// Halaman Lupa Password – frame "Reset password" di Figma
-// Langkah 1: isi email -> pop-up "periksa email"
-// Langkah 2: isi password baru -> pop-up "Password berhasil di reset" -> ke halaman Masuk
-import { useState } from 'react'
-import { InputPassword, Kembali, emailValid } from '../components/Bagian'
 
-// Ikon amplop dengan centang (pop-up periksa email)
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { InputPassword, Kembali, emailValid } from '../components/Bagian'
+import '../auth.css'
+
 function IkonEmail() {
   return (
     <svg viewBox="0 0 120 100" width="110" aria-hidden="true">
@@ -18,7 +17,6 @@ function IkonEmail() {
   )
 }
 
-// Ikon perisai dengan lubang kunci (pop-up berhasil)
 function IkonPerisai() {
   return (
     <svg viewBox="0 0 80 90" width="70" aria-hidden="true">
@@ -32,13 +30,12 @@ function IkonPerisai() {
 
 export default function LupaPassword() {
   const [langkah, setLangkah] = useState(1)
-  const [popup, setPopup] = useState('') // '' | 'email' | 'berhasil'
+  const [popup, setPopup] = useState('') 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [ulang, setUlang] = useState('')
   const [error, setError] = useState({})
 
-  // Langkah 1: cek email lalu tampilkan pop-up "periksa email"
   function kirimEmail(e) {
     e.preventDefault()
     if (!emailValid(email)) {
@@ -49,13 +46,11 @@ export default function LupaPassword() {
     setPopup('email')
   }
 
-  // Tombol "Selanjutnya" di pop-up email (anggap user sudah klik link dari email)
   function lanjutKePassword() {
     setPopup('')
     setLangkah(2)
   }
 
-  // Langkah 2: cek password baru
   function kirimPassword(e) {
     e.preventDefault()
     const err = {}
@@ -94,7 +89,7 @@ export default function LupaPassword() {
           <button type="submit" className="btn-utama">Reset Password</button>
 
           <p className="link-tengah ingat">
-            Ingat password? <a href="/masuk.html">Masuk di sini</a>
+            Ingat password? <Link to="/masuk">Masuk di sini</Link>
           </p>
         </form>
       ) : (
@@ -115,12 +110,11 @@ export default function LupaPassword() {
           <button type="submit" className="btn-utama">Reset Password</button>
 
           <p className="link-tengah ingat">
-            Ingat password? <a href="/masuk.html">Masuk di sini</a>
+            Ingat password? <Link to="/masuk">Masuk di sini</Link>
           </p>
         </form>
       )}
 
-      {/* Pop-up periksa email */}
       {popup === 'email' && (
         <div className="popup-latar">
           <div className="popup" role="dialog" aria-label="Periksa email">
@@ -137,14 +131,13 @@ export default function LupaPassword() {
         </div>
       )}
 
-      {/* Pop-up berhasil */}
       {popup === 'berhasil' && (
         <div className="popup-latar">
           <div className="popup" role="dialog" aria-label="Password berhasil di reset">
             <IkonPerisai />
             <h2>Password Berhasil di Reset</h2>
             <p>Silahkan Masuk Kembali</p>
-            <a href="/masuk.html" className="btn-utama popup-btn">Masuk</a>
+            <Link to="/masuk" className="btn-utama popup-btn">Masuk</Link>
           </div>
         </div>
       )}

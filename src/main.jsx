@@ -1,11 +1,12 @@
-// Titik awal React untuk halaman Otp
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Otp from './Otp.jsx'
-import '../auth.css'
+import { BrowserRouter } from 'react-router-dom'
+import App from './App'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Otp />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 )

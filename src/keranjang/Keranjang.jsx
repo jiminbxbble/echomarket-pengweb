@@ -1,15 +1,15 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./keranjang.css";
 
-// Komponen 1: Navbar
 function Navbar() {
   return (
     <header className="navbar-wrapper">
       <nav className="navbar">
-        <a href="/beranda.html" className="baris" style={{ textDecoration: "none", color: "inherit", cursor: "pointer" }}>
+        <Link to="/" className="baris" style={{ textDecoration: "none", color: "inherit", cursor: "pointer" }}>
           <img src="/img/logo-ikon.png" alt="Logo" className="logo" />
           <strong>EchoMarket</strong>
-        </a>
+        </Link>
 
         <div className="search-box">
           <span>🔍 </span>
@@ -17,15 +17,15 @@ function Navbar() {
         </div>
 
         <div className="baris">
-          <a href="/keranjang.html" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link to="/keranjang" style={{ textDecoration: "none", color: "inherit" }}>
             <span>🛍️ </span>
-          </a>
+          </Link>
           <span>🔔</span>
           <span>💬</span>
           <span>❤️</span>
-          <a href="/" title="Profil Saya" style={{ display: "flex", alignItems: "center" }}>
+          <Link to="/profil" title="Profil Saya" style={{ display: "flex", alignItems: "center" }}>
             <img src="/img/avatar.png" alt="Profil" className="avatar" />
-          </a>
+          </Link>
         </div>
       </nav>
 
@@ -34,7 +34,6 @@ function Navbar() {
   );
 }
 
-// Komponen 2: Kartu Rekomendasi 
 function KartuRekomendasi({ nama, harga, rating, terjual, lokasi, gambar }) {
   return (
     <div className="kartu">
@@ -49,8 +48,8 @@ function KartuRekomendasi({ nama, harga, rating, terjual, lokasi, gambar }) {
   );
 }
 
-// Komponen Utama: Halaman Keranjang
 function Keranjang() {
+  const navigate = useNavigate();
   const [jumlah, setJumlah] = useState(1);
   const [dipilih, setDipilih] = useState(false);
 
@@ -65,7 +64,7 @@ function Keranjang() {
         <h1 className="judul-halaman">Keranjang</h1>
 
         <div className="keranjang-layout">
-          {/* Bagian Kiri: Daftar Item Keranjang */}
+          
           <div className="keranjang-kiri">
             <div className="kotak-putih baris">
               <input
@@ -117,7 +116,6 @@ function Keranjang() {
             </div>
           </div>
 
-          {/* Bagian Kanan: Ringkasan Total Belanja */}
           <div className="kotak-putih total-box">
             <h4>Total Belanja Kamu</h4>
 
@@ -136,7 +134,7 @@ function Keranjang() {
             <button
               className="btn-beli"
               onClick={() => {
-                window.location.href = "/";
+                navigate("/pembayaran");
               }}
             >
               Beli
@@ -144,7 +142,6 @@ function Keranjang() {
           </div>
         </div>
 
-        {/* Bagian Bawah: Rekomendasi Produk */}
         <section>
           <h3>Rekomendasi untuk kamu</h3>
 

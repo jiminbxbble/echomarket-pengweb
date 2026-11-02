@@ -4,12 +4,12 @@ import InlineEdit from './InlineEdit'
 
 const EMAIL = 'Fauzein123@gmail.com'
 const GENDERS = ['Laki-laki', 'Perempuan', 'Lainnya']
-const MAX_SIZE = 1024 * 1024 // 1 MB
+const MAX_SIZE = 1024 * 1024 
 
 const validateUsername = (v) => (v.length < 3 ? 'Username minimal 3 karakter' : '')
 const validatePhone = (v) =>
   v && !/^(\+62|0)8\d{7,12}$/.test(v) ? 'Nomor telepon tidak valid (contoh: 08123456789)' : ''
-const formatDate = (iso) => iso.split('-').reverse().join('/') // yyyy-mm-dd -> dd/mm/yyyy
+const formatDate = (iso) => iso.split('-').reverse().join('/') 
 
 export default function ProfileForm({ profile, onSave, onNotify, namaRef }) {
   const [draft, setDraft] = useState(profile)

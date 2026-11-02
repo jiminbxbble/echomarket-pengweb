@@ -2,6 +2,8 @@ import { useCallback, useRef, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Sidebar from './components/Sidebar'
 import ProfileForm from './components/ProfileForm'
+import AddressPage from './components/AddressPage'
+import './index.css'
 
 const INITIAL_PROFILE = {
   username: 'Tamu10',
@@ -13,8 +15,9 @@ const INITIAL_PROFILE = {
   photo: null,
 }
 
-export default function App() {
+export default function Profil() {
   const [profile, setProfile] = useState(INITIAL_PROFILE)
+  const [currentPage, setCurrentPage] = useState('profil')
   const [toast, setToast] = useState('')
   const timer = useRef(null)
   const namaRef = useRef(null)
@@ -37,9 +40,18 @@ export default function App() {
         <Sidebar
           name={profile.nama || 'Fauzein'}
           photo={profile.photo}
-          onEditProfile={() => namaRef.current?.focus()}
+          page={currentPage}
+          onNavigate={setCurrentPage}
+          onEditProfile={() => {
+            setCurrentPage('profil')
+            setTimeout(() => namaRef.current?.focus(), 50)
+          }}
         />
-        <ProfileForm profile={profile} onSave={handleSave} onNotify={notify} namaRef={namaRef} />
+        {currentPage === 'alamat' ? (
+          <AddressPage />
+        ) : (
+          <ProfileForm profile={profile} onSave={handleSave} onNotify={notify} namaRef={namaRef} />
+        )}
       </div>
       <div id="toast" className={toast ? 'show' : ''}>{toast}</div>
     </>

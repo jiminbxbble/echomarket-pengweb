@@ -1,4 +1,4 @@
-// Deretan cerita (story) pengguna, kartu pertama untuk "Buat Cerita"
+
 import { cerita, pengguna } from '../data/data'
 
 export default function Cerita() {

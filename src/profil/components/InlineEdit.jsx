@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-// Baris field dengan tombol "Ubah" -> muncul input -> "Simpan"
 export default function InlineEdit({
   label, value, onChange, onNotify,
   type = 'text', placeholder, emptyText = '-', format, validate, minWidth,

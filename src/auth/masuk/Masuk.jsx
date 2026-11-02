@@ -1,8 +1,10 @@
-// Halaman Masuk (Login) – frame "Login page" di Figma
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { InputPassword, TombolSosial, Kembali, Toast, emailValid } from '../components/Bagian'
+import '../auth.css'
 
 export default function Masuk() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState({})
@@ -13,7 +15,6 @@ export default function Masuk() {
     setTimeout(() => setToast(''), 2200)
   }
 
-  // Dipanggil saat form dikirim
   function handleSubmit(e) {
     e.preventDefault()
     const err = {}
@@ -21,10 +22,9 @@ export default function Masuk() {
     if (password.length < 8) err.password = 'Password minimal 8 karakter'
     setError(err)
 
-    // Kalau tidak ada error, anggap berhasil masuk (belum ada backend)
     if (Object.keys(err).length === 0) {
       tampilkan('Berhasil masuk ✓')
-      setTimeout(() => (window.location.href = '/beranda.html'), 900)
+      setTimeout(() => navigate('/'), 900)
     }
   }
 
@@ -35,7 +35,7 @@ export default function Masuk() {
       <form className="auth-kartu" onSubmit={handleSubmit} noValidate>
         <h1 className="auth-judul">Masuk sekarang</h1>
         <p className="auth-sub">
-          Belum punya akun Echomarket? <a href="/daftar.html">Daftar</a>
+          Belum punya akun Echomarket? <Link to="/daftar">Daftar</Link>
         </p>
 
         <div className="field">
@@ -69,9 +69,9 @@ export default function Masuk() {
 
         <button type="submit" className="btn-utama">Selanjutnya</button>
 
-        <a href="/lupa-password.html" className="link-tengah">
+        <Link to="/lupa-password" className="link-tengah">
           Lupa password?
-        </a>
+        </Link>
 
         <div className="atau">atau</div>
         <TombolSosial onKlik={(nama) => tampilkan(`Masuk dengan ${nama} belum tersedia`)} />

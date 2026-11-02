@@ -1,7 +1,6 @@
-// Komponen-komponen kecil yang dipakai bersama oleh halaman Masuk, Daftar, dan OTP
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-// Ikon mata (lihat password). "tutup" = true menampilkan mata dicoret
 function IkonMata({ tutup }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round">
@@ -12,7 +11,6 @@ function IkonMata({ tutup }) {
   )
 }
 
-// Input password + tombol mata
 export function InputPassword({ value, onChange, placeholder, salah }) {
   const [lihat, setLihat] = useState(false)
   return (
@@ -36,7 +34,6 @@ export function InputPassword({ value, onChange, placeholder, salah }) {
   )
 }
 
-// Tombol masuk dengan Google & Facebook (belum terhubung ke backend)
 export function TombolSosial({ onKlik }) {
   return (
     <>
@@ -60,33 +57,27 @@ export function TombolSosial({ onKlik }) {
   )
 }
 
-// Tombol kecil kembali ke Beranda (pojok kiri atas)
 export function Kembali() {
   return (
-    <a href="/beranda.html" className="kembali">
+    <Link to="/" className="kembali">
       <img src="/img/logo-ikon.png" alt="" />
       EchoMarket
-    </a>
+    </Link>
   )
 }
 
-// Notifikasi kecil di bawah layar
 export function Toast({ pesan }) {
   return pesan ? <div className="toast">{pesan}</div> : null
 }
 
-// Cek format email sederhana
 export function emailValid(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
-// Simpan / ambil data sementara di browser (dipakai untuk alur Daftar -> OTP)
 export function simpan(kunci, nilai) {
   try {
     sessionStorage.setItem(kunci, nilai)
-  } catch {
-    /* abaikan kalau browser memblokir storage */
-  }
+  } catch {}
 }
 
 export function ambil(kunci) {

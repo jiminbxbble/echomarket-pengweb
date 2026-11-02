@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
-/* Page alamat, kartu besar seperti halaman Profil. Warna ikut index.css (terang/gelap) */
 .em-page {
   --em-green: var(--green, #4caf50);
   --em-green-dark: var(--green-d, #2e7d32);
@@ -49,7 +48,6 @@
   margin-bottom: 24px;
 }
 
-/* ---------- Tombol ---------- */
 .em-page .em-btn,
 .em-page .em-btn-o {
   display: inline-flex;
@@ -110,7 +108,6 @@
   color: var(--em-text);
 }
 
-/* ---------- Notifikasi ---------- */
 .em-page .em-success {
   margin: 0 0 16px;
   padding: 8px 14px;
@@ -120,7 +117,6 @@
   border-radius: 6px;
 }
 
-/* ---------- Page 1 (kosong & daftar) ---------- */
 .em-page .em-empty {
   display: flex;
   flex-direction: column;
@@ -189,7 +185,6 @@
   margin-top: 10px;
 }
 
-/* ---------- Page 2 (form + peta) ---------- */
 .em-page .em-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -271,7 +266,6 @@
   gap: 10px;
 }
 
-/* Toggle "Jadikan Alamat Utama" */
 .em-page .em-switch {
   display: flex;
   align-items: center;
@@ -320,7 +314,6 @@
   outline-offset: 2px;
 }
 
-/* Peta untuk alamat */
 .em-page .em-map {
   overflow: hidden;
   background: var(--em-field);
@@ -342,7 +335,6 @@
   margin: 0;
 }
 
-/* ---------- Responsif ---------- */
 @container (max-width: 680px) {
   .em-page .em-layout {
     grid-template-columns: 1fr;

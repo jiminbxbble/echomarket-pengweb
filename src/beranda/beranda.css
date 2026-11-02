@@ -1,8 +1,4 @@
-/* Gaya halaman Beranda
-   Urutan: tombol, navbar, hero, kategori, gabung, produk, tutor, footer,
-   lalu tampilan untuk layar kecil */
 
-/* Warna utama (dari Figma), dipakai dengan var(--nama) */
 :root {
   --hijau: #4caf50;
   --hijau-tua: #2e6b30;
@@ -28,17 +24,14 @@ body {
   background: var(--latar);
 }
 
-/* Pembungkus halaman, lebar maksimal mengikuti frame Figma (1184px) dan diletakkan di tengah */
 .beranda {
   max-width: 1184px;
   margin: 0 auto;
-  position: relative; /* jadi acuan posisi navbar */
+  position: relative; 
   background: var(--latar);
   overflow: hidden;
 }
 
-
-/* ===== Tombol ===== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -65,15 +58,13 @@ body {
   color: var(--hijau);
 }
 
-
-/* ===== Navbar (melayang di atas hero) ===== */
 .navbar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 10;
-  /* flex: logo, menu, dan tombol disusun mendatar dengan jarak rata */
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -118,18 +109,15 @@ body {
   gap: 10px;
 }
 
-
-/* ===== Hero ===== */
 .hero {
   height: 550px;
-  /* foto hero, warna cokelat dipakai kalau foto gagal dimuat */
+  
   background: url('/img/hero.jpg') center / cover no-repeat, #c9b8a0;
   display: flex;
   align-items: center;
   padding-left: 100px;
 }
 
-/* Kotak putih transparan di belakang teks hero */
 .hero-kotak {
   background: rgba(255, 255, 255, 0.35);
   border-radius: 10px;
@@ -156,8 +144,6 @@ body {
   font-weight: 500;
 }
 
-
-/* ===== Kategori ===== */
 .kategori {
   padding: 40px 100px 50px;
 }
@@ -173,7 +159,6 @@ body {
   position: relative;
 }
 
-/* Baris kartu yang bisa digeser ke samping */
 .kartu-baris {
   display: flex;
   gap: 35px;
@@ -186,13 +171,12 @@ body {
   display: none;
 }
 
-/* Satu kartu, lebarnya tetap 220px */
 .kartu {
   flex: 0 0 220px;
   height: 325px;
   border-radius: 10px;
-  overflow: hidden; /* supaya sudut foto ikut melengkung */
-  position: relative; /* acuan posisi label */
+  overflow: hidden; 
+  position: relative; 
   scroll-snap-align: start;
   background: #cfd8c4;
 }
@@ -200,7 +184,7 @@ body {
 .kartu img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* foto memenuhi kartu tanpa gepeng */
+  object-fit: cover; 
   display: block;
   transition: transform 0.3s;
 }
@@ -209,7 +193,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Label nama kategori di tengah bawah kartu */
 .kartu-label {
   position: absolute;
   bottom: 18px;
@@ -223,7 +206,6 @@ body {
   border-radius: 6px;
 }
 
-/* Tombol panah bulat di sisi kanan baris kartu */
 .btn-panah {
   position: absolute;
   right: 10px;
@@ -241,10 +223,8 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-
-/* ===== Gabung (EchoJualan & Echomunitas) ===== */
 .gabung {
-  /* gradasi gelap biru -> hijau dari Figma */
+  
   background: linear-gradient(135deg, #121b2b 0%, #134c30 100%);
   color: var(--putih);
   padding: 80px 112px 90px;
@@ -314,7 +294,6 @@ body {
   font-weight: 500;
 }
 
-/* Tombol hijau kecil "Gabung Sekarang" */
 .fitur-btn {
   display: inline-block;
   background: var(--hijau);
@@ -371,16 +350,12 @@ body {
   font-weight: 500;
 }
 
-
-/* ===== Judul bagian (Produk trending, EchoTutor) ===== */
 .judul-bagian {
   margin: 0 0 20px;
   font-size: 32px;
   font-weight: 600;
 }
 
-
-/* ===== Produk trending ===== */
 .produk {
   padding: 30px 122px 40px;
 }
@@ -441,8 +416,6 @@ body {
   color: #ffb02e;
 }
 
-
-/* ===== EchoTutor ===== */
 .tutor {
   padding: 20px 101px 50px;
 }
@@ -484,7 +457,6 @@ body {
   display: block;
 }
 
-/* Tombol play di tengah foto */
 .tutor-play {
   position: absolute;
   inset: 0;
@@ -513,8 +485,6 @@ body {
   line-height: 1.5;
 }
 
-
-/* ===== Footer ===== */
 .footer {
   background: linear-gradient(180deg, #2b542f 0%, #1e4021 100%);
   color: var(--putih);
@@ -656,8 +626,6 @@ body {
   text-decoration: none;
 }
 
-
-/* ===== Layar sedang (tablet) ===== */
 @media (max-width: 1100px) {
   .produk-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -669,9 +637,6 @@ body {
   }
 }
 
-
-/* ===== Layar kecil (HP) =====
-   Berlaku jika lebar layar 800px ke bawah, menu tengah disembunyikan */
 @media (max-width: 800px) {
   .navbar {
     padding: 12px 16px;

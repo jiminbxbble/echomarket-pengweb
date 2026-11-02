@@ -1,4 +1,4 @@
-// Panel kanan: Tantangan, streak, misi harian & misi mingguan
+
 import Ikon from './Ikon'
 
 function KartuMisi({ misi, onKlaim }) {

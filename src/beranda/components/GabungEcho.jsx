@@ -1,6 +1,4 @@
-// Komponen GabungEcho
-// Bagian gelap berisi 2 kartu fitur (EchoJualan & Echomunitas),
-// judul "Gabung & Jelajahi Dunia EchoMarket", dan angka statistik.
+import { Link } from 'react-router-dom'
 
 const STATISTIK = [
   { angka: '10K+', label: 'Pengguna Aktif' },
@@ -12,10 +10,10 @@ export default function GabungEcho() {
   return (
     <section className="gabung" id="gabung">
       <div className="fitur-grid">
-        {/* Kartu hijau: EchoJualan */}
+        
         <div className="fitur fitur-hijau">
           <span className="fitur-ikon">
-            {/* ikon keranjang + */}
+            
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="20" r="1.3" /><circle cx="18" cy="20" r="1.3" />
               <path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 7H6" /><path d="M13 9v4M11 11h4" />
@@ -23,10 +21,9 @@ export default function GabungEcho() {
           </span>
           <h3>EchoJualan</h3>
           <p>Ubah limbah jadi penghasilan.</p>
-          <a href="/daftar.html" className="fitur-btn">Gabung Sekarang</a>
+          <Link to="/daftar" className="fitur-btn">Gabung Sekarang</Link>
         </div>
 
-        {/* Kartu biru: Echomunitas */}
         <div className="fitur fitur-biru">
           <span className="fitur-ikon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
@@ -35,7 +32,7 @@ export default function GabungEcho() {
           </span>
           <h3>Echomunitas</h3>
           <p>Interaksi seru, peluang tanpa batas.</p>
-          <a href="/echomunitas.html" className="fitur-btn">Gabung Sekarang</a>
+          <Link to="/echomunitas" className="fitur-btn">Gabung Sekarang</Link>
         </div>
       </div>
 
