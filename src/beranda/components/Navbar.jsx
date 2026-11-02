@@ -4,6 +4,7 @@
 const MENU = [
   { label: 'Beranda', href: '/beranda.html', aktif: true },
   { label: 'Marketplace', href: '#', aktif: false },
+  { label: 'Keranjang', href: '/keranjang.html', aktif: false },
   { label: 'Echomunity', href: '#', aktif: false },
   { label: 'Echojualan', href: '#', aktif: false },
 ]
@@ -33,7 +34,7 @@ export default function Navbar() {
 
       {/* Tombol di kanan: Masuk (putih) dan Daftar (hijau) */}
       <div className="nav-tombol">
-        <a href="#" className="btn btn-putih">Masuk</a>
+        <a href="/" className="btn btn-putih">Masuk</a>
         <a href="#" className="btn btn-hijau">Daftar</a>
       </div>
     </header>
