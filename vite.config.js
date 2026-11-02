@@ -9,6 +9,7 @@ export default defineConfig({
       input: {
         main: 'index.html', // Profil
         beranda: 'beranda.html',
+        keranjang: 'keranjang.html',
         masuk: 'masuk.html',
         daftar: 'daftar.html',
         otp: 'otp.html',

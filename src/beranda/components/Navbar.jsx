@@ -4,6 +4,7 @@
 const MENU = [
   { label: 'Beranda', href: '/beranda.html', aktif: true },
   { label: 'Marketplace', href: '#produk', aktif: false },
+  { label: 'Keranjang', href: '/keranjang.html', aktif: false },
   { label: 'Echomunity', href: '/echomunitas.html', aktif: false },
   { label: 'Echojualan', href: '#gabung', aktif: false },
 ]
