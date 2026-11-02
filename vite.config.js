@@ -3,12 +3,17 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  // Dua halaman: index.html (Profil) dan beranda.html (Beranda)
+  // Setiap halaman punya file HTML sendiri (multi-page)
   build: {
     rollupOptions: {
       input: {
-        main: 'index.html',
+        main: 'index.html', // Profil
         beranda: 'beranda.html',
+        masuk: 'masuk.html',
+        daftar: 'daftar.html',
+        otp: 'otp.html',
+        lupaPassword: 'lupa-password.html',
+        echomunitas: 'echomunitas.html',
       },
     },
   },

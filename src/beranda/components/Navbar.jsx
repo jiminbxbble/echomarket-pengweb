@@ -3,21 +3,17 @@
 // dan tombol Masuk & Daftar di kanan.
 const MENU = [
   { label: 'Beranda', href: '/beranda.html', aktif: true },
-  { label: 'Marketplace', href: '#', aktif: false },
-  { label: 'Echomunity', href: '#', aktif: false },
-  { label: 'Echojualan', href: '#', aktif: false },
+  { label: 'Marketplace', href: '#produk', aktif: false },
+  { label: 'Echomunity', href: '/echomunitas.html', aktif: false },
+  { label: 'Echojualan', href: '#gabung', aktif: false },
 ]
 
 export default function Navbar() {
   return (
     <header className="navbar">
-      {/* Logo: ikon keranjang (SVG) + nama EchoMarket */}
+      {/* Logo: gambar logo dari Figma + nama EchoMarket */}
       <a className="logo" href="/beranda.html">
-        <svg className="logo-ikon" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="9" cy="20" r="1.4" />
-          <circle cx="18" cy="20" r="1.4" />
-          <path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 7H6" />
-        </svg>
+        <img className="logo-ikon" src="/img/logo-ikon.png" alt="" />
         EchoMarket
       </a>
 
@@ -33,8 +29,8 @@ export default function Navbar() {
 
       {/* Tombol di kanan: Masuk (putih) dan Daftar (hijau) */}
       <div className="nav-tombol">
-        <a href="#" className="btn btn-putih">Masuk</a>
-        <a href="#" className="btn btn-hijau">Daftar</a>
+        <a href="/masuk.html" className="btn btn-putih">Masuk</a>
+        <a href="/daftar.html" className="btn btn-hijau">Daftar</a>
       </div>
     </header>
   )

@@ -1,0 +1,920 @@
+/* Gaya halaman Echomunitas
+   Urutan: dasar, header, menu kiri, feed (buat post, cerita, tutor, postingan),
+   panel tantangan, modal, lalu layar kecil */
+
+:root {
+  --hijau: #4caf50;
+  --hijau-muda: #a5d6a7;
+  --latar: #f1f8e9;
+  --kartu: #fafafa;
+  --teks: #000000;
+  --abu: #6e6969;
+  --biru: #0060af;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: var(--teks);
+  background: var(--latar);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* ===== Header ===== */
+.em-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--latar);
+  display: grid;
+  grid-template-columns: 216px 1fr auto;
+  align-items: center;
+  gap: 40px;
+  padding: 14px max(24px, calc((100vw - 1184px) / 2 + 24px)) 8px;
+}
+
+.em-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+  padding-left: 30px;
+}
+
+.em-logo img {
+  width: 48px;
+}
+
+.em-cari {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  max-width: 650px;
+  border: 1px solid var(--hijau-muda);
+  border-radius: 10px;
+  background: #fff;
+  padding: 0 16px;
+}
+
+.em-cari:focus-within {
+  border-color: var(--hijau);
+}
+
+.em-cari input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+}
+
+.em-kanan {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.em-ikon {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.em-ikon a {
+  color: #000;
+  display: flex;
+}
+
+.em-ikon a.kuning { color: #e1ad1f; }
+.em-ikon a.hijau { color: var(--hijau); }
+.em-ikon a.merah { color: #ff0000; }
+
+.em-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.em-lokasi {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ===== Tata letak 3 kolom ===== */
+.em-isi {
+  max-width: 1184px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 216px minmax(0, 540px) 260px;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 20px 24px 60px 0;
+  align-items: start;
+}
+
+/* ===== Menu kiri ===== */
+.em-menu {
+  position: sticky;
+  top: 110px;
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 8px;
+}
+
+.em-menu h2 {
+  margin: 0 0 16px 24px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.em-menu a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 24px;
+  margin-bottom: 4px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 0 6px 6px 0;
+}
+
+.em-menu a:hover {
+  background: rgba(76, 175, 80, 0.12);
+}
+
+.em-menu a.aktif {
+  background: var(--hijau);
+  color: #fff;
+}
+
+/* ===== Kotak putih umum ===== */
+.em-kotak {
+  background: var(--kartu);
+  border-radius: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+.em-feed {
+  min-width: 0;
+}
+
+/* ===== Buat postingan ===== */
+.em-buat {
+  padding: 16px 16px 12px;
+}
+
+.em-buat-input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  background: #fff;
+  padding: 0 8px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--abu);
+  text-align: left;
+}
+
+.em-plus {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--hijau);
+  border-radius: 6px;
+  color: var(--hijau);
+  display: grid;
+  place-items: center;
+}
+
+.em-buat-aksi {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 10px;
+}
+
+.em-buat-aksi button {
+  border: 0;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--abu);
+}
+
+.em-buat-aksi button:hover {
+  color: var(--hijau);
+}
+
+/* ===== Cerita ===== */
+.em-cerita {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 20px;
+}
+
+.em-cerita::-webkit-scrollbar {
+  display: none;
+}
+
+.em-cerita-kartu {
+  position: relative;
+  flex: 0 0 150px;
+  height: 240px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.em-cerita-kartu > img:first-child {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.em-cerita-kartu:hover > img:first-child {
+  transform: scale(1.05);
+}
+
+.em-cerita-saya > img:first-child {
+  height: 150px;
+}
+
+.em-cerita-saya b {
+  position: absolute;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.em-cerita-plus {
+  position: absolute;
+  top: 132px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: var(--hijau);
+  color: #fff;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.em-cerita-avatar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--hijau);
+  object-fit: cover;
+}
+
+.em-cerita-nama {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  color: #fff;
+  font-size: 16px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== EchoTutor ===== */
+.em-tutor {
+  padding: 16px 10px 20px;
+}
+
+.em-tutor h3 {
+  margin: 0 0 16px 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.em-tutor-baris {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+}
+
+.em-tutor-kartu {
+  position: relative;
+  flex: 0 0 210px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #000;
+  scroll-snap-align: start;
+}
+
+.em-tutor-kartu img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+}
+
+.em-tutor-play {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--hijau);
+  display: grid;
+  place-items: center;
+}
+
+.em-tutor-kartu p {
+  margin: 0;
+  padding: 10px 16px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+/* ===== Postingan ===== */
+.em-post {
+  padding: 18px 0 6px;
+  overflow: hidden;
+}
+
+.em-penulis {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.em-penulis img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.em-post-teks {
+  margin: 12px 0;
+  padding: 0 18px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.em-link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.em-post-foto {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.em-post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 0 30px;
+}
+
+.em-post-grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.em-post-angka {
+  display: flex;
+  gap: 18px;
+  margin: 12px 18px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d9d9d9;
+  font-size: 12px;
+}
+
+.em-post-angka span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.em-post-aksi {
+  display: flex;
+  justify-content: space-around;
+  padding: 6px 0;
+}
+
+.em-post-aksi button {
+  border: 0;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.em-post-aksi button:hover {
+  background: rgba(76, 175, 80, 0.12);
+}
+
+.em-post-aksi button.aktif {
+  color: var(--hijau);
+  font-weight: 600;
+}
+
+/* ===== Komentar ===== */
+.em-komentar {
+  border-top: 1px solid #d9d9d9;
+  padding: 12px 18px 10px;
+}
+
+.em-urut {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.em-komen {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.em-komen > img,
+.em-komen-form img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.em-komen-isi {
+  background: #f0f0f0;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.em-komen-isi b {
+  font-size: 12px;
+}
+
+.em-komen-isi p {
+  margin: 2px 0 0;
+  font-size: 12px;
+}
+
+.em-komen small {
+  display: block;
+  margin: 4px 0 0 12px;
+  font-size: 11px;
+  color: var(--abu);
+}
+
+.em-komen-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.em-komen-form input {
+  flex: 1;
+  height: 38px;
+  border: 1px solid #d9d9d9;
+  border-radius: 20px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.em-komen-form input:focus {
+  border-color: var(--hijau);
+}
+
+/* ===== Tombol hijau ===== */
+.em-btn-hijau {
+  border: 0;
+  border-radius: 8px;
+  background: var(--hijau);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+}
+
+.em-btn-hijau:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.em-btn-hijau.lebar {
+  width: 100%;
+  padding: 11px;
+  margin-top: 14px;
+}
+
+.em-btn-hijau.kecil {
+  padding: 4px 12px;
+  font-size: 12px;
+}
+
+/* ===== Panel Tantangan ===== */
+.em-tantangan {
+  position: sticky;
+  top: 110px;
+}
+
+.em-tantangan h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.em-tantangan-sub {
+  margin: 4px 0 20px;
+  font-size: 12px;
+}
+
+.em-streak {
+  border: 1px solid #b3b3b3;
+  border-radius: 10px;
+  padding: 12px 20px;
+  text-align: center;
+  margin: 0 10px 20px;
+}
+
+.em-streak strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.em-streak span {
+  font-size: 12px;
+}
+
+.em-tantangan h3 {
+  margin: 10px 0 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d9d9d9;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.em-misi {
+  border-left: 3px solid #d9d9d9;
+  padding: 10px 0 10px 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.em-misi.selesai {
+  border-left-color: var(--hijau);
+}
+
+.em-misi-judul {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.em-misi-judul b {
+  font-size: 12px;
+}
+
+.em-centang {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--hijau);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.em-label {
+  background: #dbeafe;
+  color: var(--biru);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.em-misi p {
+  margin: 4px 0 6px;
+  font-size: 12px;
+}
+
+.em-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.em-bar::before {
+  content: none;
+}
+
+.em-bar div {
+  height: 5px;
+  border-radius: 5px;
+  background: var(--hijau);
+  transition: width 0.4s;
+}
+
+.em-bar {
+  position: relative;
+}
+
+.em-bar span {
+  margin-left: auto;
+}
+
+/* Rel abu-abu di belakang progress */
+.em-misi .em-bar {
+  background: linear-gradient(#9ca3af, #9ca3af) left center / calc(100% - 30px) 5px no-repeat;
+  border-radius: 5px;
+}
+
+.em-misi .em-bar div {
+  max-width: calc(100% - 30px);
+}
+
+.em-hadiah {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+}
+
+.em-hadiah svg {
+  color: #ff0000;
+}
+
+/* ===== Modal Buat Postingan ===== */
+.em-modal-latar {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0, 0, 0, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.em-modal {
+  width: 100%;
+  max-width: 539px;
+  background: var(--kartu);
+  border-radius: 15px;
+  padding: 18px 0 20px;
+}
+
+.em-modal > *:not(.em-penulis):not(.em-modal-kepala) {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.em-modal .em-btn-hijau.lebar {
+  width: calc(100% - 40px);
+}
+
+.em-modal-kepala {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 20px 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.em-modal-kepala h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.em-modal-kepala button {
+  position: absolute;
+  right: 16px;
+  border: 0;
+  background: #eee;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+}
+
+.em-modal textarea {
+  display: block;
+  width: calc(100% - 40px);
+  min-height: 140px;
+  margin-top: 14px;
+  border: 0;
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  font: inherit;
+  font-size: 16px;
+}
+
+.em-pratinjau {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 6px;
+}
+
+.em-pratinjau img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.em-modal-tambah {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.em-modal-tambah button {
+  border: 0;
+  background: none;
+  color: var(--hijau);
+  display: flex;
+}
+
+/* ===== Lain-lain ===== */
+.em-kosong {
+  text-align: center;
+  color: var(--abu);
+  font-size: 14px;
+  padding: 40px 0;
+}
+
+.em-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  background: #1e1e1e;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 60;
+}
+
+/* ===== Layar sedang: panel tantangan pindah ke bawah ===== */
+@media (max-width: 1100px) {
+  .em-isi {
+    grid-template-columns: 200px minmax(0, 1fr);
+    padding-right: 24px;
+  }
+
+  .em-tantangan {
+    position: static;
+    grid-column: 2;
+  }
+}
+
+/* ===== Layar kecil (HP) ===== */
+@media (max-width: 760px) {
+  .em-header {
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    padding: 10px 16px;
+  }
+
+  .em-logo {
+    padding-left: 0;
+    font-size: 0; /* sembunyikan tulisan, sisakan logo */
+  }
+
+  .em-logo img {
+    width: 38px;
+  }
+
+  .em-kanan {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .em-isi {
+    grid-template-columns: 1fr;
+    padding: 10px 12px 40px;
+    gap: 16px;
+  }
+
+  .em-menu {
+    position: static;
+    border: 0;
+  }
+
+  .em-menu h2 {
+    display: none;
+  }
+
+  .em-menu nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+  }
+
+  .em-menu a {
+    white-space: nowrap;
+    border-radius: 20px;
+    padding: 8px 14px;
+    background: #fff;
+  }
+
+  .em-tantangan {
+    grid-column: auto;
+  }
+
+  .em-buat-aksi {
+    gap: 20px;
+  }
+
+  .em-post-aksi button {
+    padding: 8px 6px;
+    font-size: 11px;
+  }
+}
