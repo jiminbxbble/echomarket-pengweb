@@ -5,6 +5,7 @@ const MENU = [
   { icon: 'user', label: 'Akun saya', page: 'profil' },
   { icon: 'bank', label: 'Bank' },
   { icon: 'pin', label: 'Alamat', page: 'alamat' },
+  { icon: 'cart', label: 'Keranjang saya', href: '/keranjang.html' },
   { icon: 'bell', label: 'Pengataturan Notifikasi' },
   { icon: 'lock', label: 'Pengataturan Privasi' },
   { icon: 'box', label: 'Pesanan saya' },
@@ -29,7 +30,13 @@ export default function Sidebar({ name, photo, onEditProfile, page, onNavigate }
           <a
             key={m.label}
             className={m.page === page ? 'on' : ''}
-            onClick={() => m.page && onNavigate(m.page)}
+            onClick={() => {
+              if (m.href) {
+                window.location.href = m.href
+              } else if (m.page) {
+                onNavigate(m.page)
+              }
+            }}
           >
             <span><Icon name={m.icon} /></span>
             {m.label}
