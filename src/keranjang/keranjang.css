@@ -1,127 +1,233 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background: #f1f8e8;
-  color: #1e1e1e;
+/* Gaya halaman Keranjang (semua aturan di-scope ke .halaman-keranjang agar tidak bentrok dengan halaman lain) */
+.halaman-keranjang {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 32px 60px;
+  color: #111827;
   font-size: 13px;
 }
 
-.halaman-keranjang {
-  max-width: 1050px;
-  margin: 0 auto;
-  padding: 20px 40px 60px;
-}
-
-.baris {
+.halaman-keranjang .baris {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-.baris-antara {
+
+.halaman-keranjang .baris-antara {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.navbar {
+.halaman-keranjang .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
-.logo { width: 36px; }
-.avatar { width: 32px; height: 32px; border-radius: 50%; }
-.search-box {
+
+.halaman-keranjang .logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.halaman-keranjang .avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.halaman-keranjang .search-box {
   flex: 1;
   max-width: 450px;
   display: flex;
   gap: 8px;
   background: #fff;
-  border: 1.5px solid #68b968;
-  border-radius: 10px;
+  border: 1.5px solid #22c55e;
+  border-radius: 12px;
   padding: 8px 14px;
 }
-.search-box input { border: none; outline: none; width: 100%; }
-.lokasi { text-align: right; font-size: 11px; font-weight: 600; margin: 8px 0 20px; }
 
-.judul-halaman { font-size: 24px; margin-bottom: 18px; }
-.keranjang-layout {
+.halaman-keranjang .search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: transparent;
+}
+
+.halaman-keranjang .lokasi {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+  color: #15803d;
+  margin: 10px 0 20px;
+}
+
+.halaman-keranjang .judul-halaman {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.halaman-keranjang .keranjang-layout {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 40px;
-  margin-bottom: 60px;
+  gap: 32px;
+  margin-bottom: 50px;
 }
-.keranjang-kiri { flex: 1; max-width: 560px; display: flex; flex-direction: column; gap: 16px; }
-.kotak-putih {
+
+.halaman-keranjang .keranjang-kiri {
+  flex: 1;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.halaman-keranjang .kotak-putih {
   background: #fff;
+  border: 1px solid #e2ece5;
   padding: 20px 24px;
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(16, 42, 27, 0.05);
 }
-.produk-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
 
-.counter {
+.halaman-keranjang .produk-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.halaman-keranjang .counter {
   display: flex;
   align-items: center;
   gap: 14px;
-  border: 1px solid #999;
-  border-radius: 20px;
-  padding: 2px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 3px 12px;
 }
-.counter button { background: none; border: none; font-size: 16px; cursor: pointer; }
 
-.total-box { width: 310px; display: flex; flex-direction: column; gap: 12px; }
-.btn-promo {
+.halaman-keranjang .counter button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.halaman-keranjang .total-box {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.halaman-keranjang .btn-promo {
   display: flex;
   justify-content: space-between;
-  background: #cdeccd;
-  border: 1px solid #5cb85c;
-  border-radius: 8px;
-  padding: 8px 12px;
+  background: #ecfdf5;
+  border: 1px solid #86efac;
+  color: #14532d;
+  border-radius: 10px;
+  padding: 10px 14px;
   font-weight: 600;
   cursor: pointer;
 }
-.btn-beli {
-  background: #4caf50;
+
+.halaman-keranjang .btn-beli {
+  background: #16a34a;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 10px;
-  font-weight: 600;
+  border-radius: 10px;
+  padding: 11px;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.grid-rekomendasi {
-  display: grid;
-  grid-template-columns: repeat(3, 160px);
-  gap: 20px;
-  margin-top: 14px;
+.halaman-keranjang .btn-beli:hover {
+  background: #15803d;
 }
-.kartu {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-.kartu img { width: 100%; height: 130px; object-fit: cover; }
-.kartu-isi { padding: 10px; font-size: 11px; }
-.kartu-isi p { color: #777; font-size: 10px; margin-top: 4px; }
 
-/* Tambahan: Toast Peringatan, Box Ongkir, & Halaman QRIS */
-.toast-hitam {
-  background: #2f2f2f;
+.halaman-keranjang .grid-rekomendasi {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 18px;
+  margin-top: 14px;
+  align-items: start;
+}
+
+.halaman-keranjang .kartu {
+  background: #fff;
+  border: 1px solid #e2ece5;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(16, 42, 27, 0.05);
+}
+
+.halaman-keranjang .kartu img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+}
+
+.halaman-keranjang .kartu-isi {
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.halaman-keranjang .kartu-isi p {
+  color: #6b7280;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.halaman-keranjang .toast-hitam {
+  background: #1f2937;
   color: #fff;
   padding: 10px 24px;
-  border-radius: 14px;
-  min-width: 420px;
+  border-radius: 12px;
+  min-width: 320px;
   font-weight: 600;
 }
-.toast-hitam button { background: none; border: none; color: #fff; font-weight: 700; cursor: pointer; }
-.box-ongkir { border: 1px solid #aaa; border-radius: 12px; padding: 12px 16px; margin-top: 14px; }
-.kotak-hijau { background: #d4ebd0; padding: 20px 28px; border-radius: 16px; }
-.badge-hijau { background: #c8f7c8; color: #2e7d32; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+
+.halaman-keranjang .toast-hitam button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.halaman-keranjang .box-ongkir {
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-top: 14px;
+}
+
+.halaman-keranjang .kotak-hijau {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  padding: 20px 28px;
+  border-radius: 16px;
+}
+
+.halaman-keranjang .badge-hijau {
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.halaman-keranjang main.kontainer-utama {
+  min-width: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}

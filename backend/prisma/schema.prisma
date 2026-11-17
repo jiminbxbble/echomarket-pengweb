@@ -1,0 +1,168 @@
+// Schema database EchoMarket (PostgreSQL di Neon).
+// Nama kolom mengikuti nama field yang sudah dipakai frontend (nama, harga, hargaAwal, ...)
+// supaya frontend bisa langsung memakai respons API tanpa banyak mapping.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  // Neon memberi 2 URL: pooled (untuk aplikasi) dan direct (untuk migrasi).
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum StatusPesanan {
+  MENUNGGU_PEMBAYARAN
+  DIBAYAR
+  DIKIRIM
+  SELESAI
+  DIBATALKAN
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  nama      String
+  email     String   @unique
+  password  String // hash bcrypt, tidak pernah dikirim ke frontend
+  telepon   String?
+  avatar    String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  produk    Product[]
+  keranjang CartItem[]
+  pesanan   Order[]
+  alamat    Address[]
+  postingan Post[]
+  komentar  Comment[]
+}
+
+model Category {
+  id     String    @id // slug, contoh: "kardus"
+  nama   String
+  ikon   String?
+  produk Product[]
+}
+
+model Product {
+  id         Int      @id @default(autoincrement())
+  nama       String
+  deskripsi  String?
+  harga      Int // rupiah, integer supaya tidak ada error pembulatan
+  hargaAwal  Int?
+  stok       Int      @default(0)
+  rating     Float    @default(0)
+  terjual    Int      @default(0)
+  lokasi     String?
+  gambar     String?
+  flashSale  Boolean  @default(false)
+  kategoriId String
+  penjualId  Int?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  kategori  Category    @relation(fields: [kategoriId], references: [id])
+  penjual   User?       @relation(fields: [penjualId], references: [id], onDelete: SetNull)
+  keranjang CartItem[]
+  orderItem OrderItem[]
+
+  // Index untuk query yang paling sering: filter kategori & urut harga/terlaris
+  @@index([kategoriId])
+  @@index([harga])
+  @@index([terjual])
+}
+
+model CartItem {
+  id        Int @id @default(autoincrement())
+  userId    Int
+  productId Int
+  jumlah    Int @default(1)
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId]) // satu produk = satu baris di keranjang
+}
+
+model Order {
+  id          Int           @id @default(autoincrement())
+  userId      Int
+  total       Int
+  ongkir      Int           @default(0)
+  status      StatusPesanan @default(MENUNGGU_PEMBAYARAN)
+  metodeBayar String
+  alamatKirim String
+  createdAt   DateTime      @default(now())
+
+  user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items OrderItem[]
+
+  @@index([userId])
+}
+
+model OrderItem {
+  id        Int @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  jumlah    Int
+  harga     Int // harga saat dibeli (snapshot), bukan harga produk sekarang
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+}
+
+model Address {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  label     String // "Rumah", "Kantor"
+  penerima  String
+  telepon   String
+  provinsi  String
+  kota      String
+  kecamatan String?
+  detail    String
+  utama     Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  teks      String
+  gambar    String[]
+  suka      Int      @default(0)
+  createdAt DateTime @default(now())
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  komentar Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  userId    Int
+  teks      String
+  createdAt DateTime @default(now())
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Tutorial {
+  id       Int     @id @default(autoincrement())
+  judul    String
+  kategori String
+  gambar   String?
+  konten   String?
+}

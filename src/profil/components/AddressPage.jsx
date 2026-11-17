@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { api } from "../../lib/api";
+import { ambilToken } from "../../auth/sesi";
 import "./AddressPage.css";
 
 const STORAGE_KEY = "echomarket_alamat";
@@ -66,6 +68,31 @@ export default function AddressPage() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(addresses));
   }, [addresses]);
+
+  useEffect(() => {
+    if (!ambilToken()) return;
+    let aktif = true;
+    api.get('/addresses')
+      .then((list) => {
+        if (aktif && Array.isArray(list)) {
+          setAddresses(list.map((a) => ({
+            id: a.id,
+            label: a.label,
+            nama: a.penerima,
+            telepon: a.telepon,
+            namaProvinsi: a.provinsi,
+            namaKota: a.kota,
+            namaKecamatan: a.kecamatan || '',
+            namaKelurahan: '',
+            jalan: a.detail,
+            kodePos: '',
+            utama: a.utama,
+          })));
+        }
+      })
+      .catch(() => {});
+    return () => { aktif = false; };
+  }, []);
 
   useEffect(() => {
     if (notice) {
@@ -159,7 +186,7 @@ export default function AddressPage() {
     setErrors(validate(form));
   };
 
-  const handleSubmit = (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault();
     const currentErrors = validate(form);
     setErrors(currentErrors);
@@ -169,13 +196,35 @@ export default function AddressPage() {
     setTouched(allTouched);
 
     const adaError = Object.keys(currentErrors).length > 0;
-    if (adaError) return; 
+    if (adaError) return;
+
+    const isUtama = form.utama || addresses.length === 0;
+    let createdId = Date.now();
+
+    if (ambilToken()) {
+      try {
+        const created = await api.post('/addresses', {
+          label: form.label,
+          penerima: form.nama,
+          telepon: form.telepon,
+          provinsi: namaProvinsi || form.provinsi,
+          kota: namaKota || form.kota,
+          kecamatan: namaKecamatan || form.kecamatan || undefined,
+          detail: `${form.jalan}${namaKelurahan ? ', ' + namaKelurahan : ''}${form.kodePos ? ' (' + form.kodePos + ')' : ''}`,
+          utama: isUtama,
+        });
+        createdId = created.id;
+      } catch (err) {
+        setNotice(err.message || "Gagal menyimpan alamat ke server");
+        return;
+      }
+    }
 
     const newAddress = { 
       ...form, 
       namaProvinsi, namaKota, namaKecamatan, namaKelurahan,
-      id: Date.now(), 
-      utama: form.utama || addresses.length === 0 
+      id: createdId, 
+      utama: isUtama 
     };
 
     setAddresses((prevAddresses) => {
@@ -203,11 +252,25 @@ export default function AddressPage() {
     setView("form");
   };
 
-  const setUtama = (id) => {
+  const setUtama = async (id) => {
+    if (ambilToken()) {
+      try {
+        await api.patch(`/addresses/${id}`, { utama: true });
+      } catch {
+        return;
+      }
+    }
     setAddresses((prev) => prev.map((a) => ({ ...a, utama: a.id === id })));
   };
 
-  const removeAddress = (id) => {
+  const removeAddress = async (id) => {
+    if (ambilToken()) {
+      try {
+        await api.delete(`/addresses/${id}`);
+      } catch {
+        return;
+      }
+    }
     if (!window.confirm("Hapus alamat ini?")) return;
     
     setAddresses((prev) => {

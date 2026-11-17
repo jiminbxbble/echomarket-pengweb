@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import Ikon from './Ikon'
 
 const MENU = [
-  { label: 'Jelajahi barang', ikon: 'toko', href: '/#produk' },
+  { label: 'Jelajahi barang', ikon: 'toko', href: '/marketplace' },
   { label: 'Echomunitas', ikon: 'dunia', href: '/echomunitas', aktif: true },
   { label: 'Echojualan', ikon: 'troli', href: '/#gabung' },
   { label: 'Daftar sebagai penjual', ikon: 'daftarToko', href: '/daftar' },

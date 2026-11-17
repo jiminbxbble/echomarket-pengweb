@@ -2,8 +2,12 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { InputPassword, TombolSosial, Kembali, Toast, emailValid, simpan } from '../components/Bagian'
+import { masukkanSesi } from '../sesi'
+import { api } from '../../lib/api'
 import '../auth.css'
 
+
+// Komponen untuk halaman Daftar (Register) yang digunakan untuk membuat akun pengguna baru.
 export default function Daftar() {
   const navigate = useNavigate()
   const [langkah, setLangkah] = useState(1)
@@ -13,11 +17,12 @@ export default function Daftar() {
   const [error, setError] = useState({})
   const [toast, setToast] = useState('')
 
+  // Fungsi untuk menampilkan pesan toast sementara kepada pengguna.
   function tampilkan(pesan) {
     setToast(pesan)
     setTimeout(() => setToast(''), 2200)
   }
-
+// Fungsi untuk menangani pengiriman form email. Validasi format email dilakukan di sini.
   function kirimEmail(e) {
     e.preventDefault()
     if (!emailValid(email)) {
@@ -27,19 +32,26 @@ export default function Daftar() {
     setError({})
     setLangkah(2)
   }
-
-  function kirimPassword(e) {
+// Fungsi untuk menangani pengiriman form password. Validasi panjang password dan kesamaan password dilakukan di sini.
+  async function kirimPassword(e) {
     e.preventDefault()
     const err = {}
     if (password.length < 8) err.password = 'Password minimal 8 karakter'
     if (konfirmasi !== password) err.konfirmasi = 'Konfirmasi password tidak sama'
     setError(err)
     if (Object.keys(err).length === 0) {
-      simpan('email-daftar', email) 
-      navigate('/otp')
+      try {
+        const nama = email.split('@')[0] || 'Pengguna'
+        const res = await api.post('/auth/register', { nama, email, password })
+        masukkanSesi(email, res.accessToken, res.user)
+        simpan('email-daftar', email)
+        navigate('/otp')
+      } catch (errApi) {
+        tampilkan(errApi.message || 'Gagal mendaftar')
+      }
     }
   }
-
+// Render halaman Daftar dengan form input untuk email, password baru, dan konfirmasi password, serta menampilkan pesan toast sesuai dengan langkah yang sedang dilakukan.
   return (
     <main className="auth-dua">
       <Kembali />
@@ -77,7 +89,7 @@ export default function Daftar() {
                 <p className="petunjuk">Contoh: email@Echomarket.com</p>
               )}
             </div>
-
+            {/* Tombol daftar, mengirim form email. */}
             <button type="submit" className="btn-utama">Daftar</button>
 
             <p className="syarat">
@@ -113,3 +125,5 @@ export default function Daftar() {
     </main>
   )
 }
+
+// belum terhubung ke backend, jadi tombol google/facebook dan proses autentikasi tidak benar-benar terjadi. Ini hanya untuk tujuan demonstrasi.

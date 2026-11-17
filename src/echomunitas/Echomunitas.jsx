@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import MenuKiri from './components/MenuKiri'
 import BuatPostingan from './components/BuatPostingan'
@@ -8,6 +8,8 @@ import TutorBaris from './components/TutorBaris'
 import Postingan from './components/Postingan'
 import Tantangan from './components/Tantangan'
 import { pengguna, postinganAwal, misiAwal } from './data/data'
+import { api } from '../lib/api'
+import { ambilToken } from '../auth/sesi'
 import './echomunitas.css'
 
 function tambahProgres(misi, ids) {
@@ -22,16 +24,66 @@ export default function Echomunitas() {
   const [cari, setCari] = useState('')
   const [toast, setToast] = useState('')
 
+  useEffect(() => {
+    let aktif = true
+    async function muatPosts() {
+      try {
+        const data = await api.get('/community/posts')
+        if (aktif && Array.isArray(data) && data.length > 0) {
+          const terpetakan = data.map((p) => ({
+            id: p.id,
+            nama: p.user?.nama || 'Pengguna',
+            avatar: p.user?.avatar || pengguna.avatar,
+            teks: p.teks,
+            gambar: p.gambar || [],
+            suka: p.suka ?? 0,
+            dibagikan: 0,
+            komentar: (p.komentar || []).map((k) => ({
+              id: k.id,
+              nama: k.user?.nama || 'Pengguna',
+              avatar: k.user?.avatar || pengguna.avatar,
+              teks: k.teks,
+            })),
+          }))
+          setPosts(terpetakan)
+        }
+      } catch {
+        /* fallback ke postinganAwal jika backend belum aktif */
+      }
+    }
+    muatPosts()
+    return () => { aktif = false }
+  }, [])
+
   function tampilkan(pesan) {
     setToast(pesan)
     setTimeout(() => setToast(''), 2200)
   }
 
-  function kirimPost({ teks, gambar }) {
+  async function kirimPost({ teks, gambar }) {
+    let idBaru = Date.now()
+    let namaBaru = pengguna.nama
+    let avatarBaru = pengguna.avatar
+
+    if (ambilToken()) {
+      try {
+        const created = await api.post('/community/posts', {
+          teks,
+          gambar: Array.isArray(gambar) ? gambar : gambar ? [gambar] : [],
+        })
+        idBaru = created.id
+        namaBaru = created.user?.nama || namaBaru
+        avatarBaru = created.user?.avatar || avatarBaru
+      } catch (err) {
+        tampilkan(err.message || 'Gagal mengirim postingan ke server')
+        return
+      }
+    }
+
     const baru = {
-      id: Date.now(),
-      nama: pengguna.nama,
-      avatar: pengguna.avatar,
+      id: idBaru,
+      nama: namaBaru,
+      avatar: avatarBaru,
       teks,
       gambar,
       suka: 0,
