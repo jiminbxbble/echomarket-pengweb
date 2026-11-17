@@ -1,6 +1,6 @@
 ﻿# EchoMarket - Full-Stack Eco-Friendly Marketplace
 
-Aplikasi full-stack marketplace barang daur ulang dengan integrasi **EchoBot AI (Google Gemini)**, komunitas **Echomunitas**, dan database **PostgreSQL (Neon)**.
+Aplikasi full-stack marketplace barang daur ulang dengan integrasi **EchoBot AI (Google Gemini)**, komunitas **Echomunitas**, dan database **PostgreSQL (Neon)**. untuk ai yang di gunakan gemini API key
 
 ## Struktur Repository
 
