@@ -1,0 +1,29 @@
+{
+  "kategori": [
+    { "id": "sepatu", "nama": "Sepatu", "ikon": "/img/kat-sepatu.png" },
+    { "id": "plastik", "nama": "Plastik", "ikon": "/img/kat-plastik.png" },
+    { "id": "kardus", "nama": "Kardus", "ikon": "/img/kat-kardus.png" },
+    { "id": "diy", "nama": "DIY", "ikon": "/img/kat-diy.png" },
+    { "id": "mainan", "nama": "Mainan Bekas", "ikon": "/img/kat-mainan.png" },
+    { "id": "fashion", "nama": "Fashion", "ikon": "/img/kat-fashion.png" },
+    { "id": "aksesoris", "nama": "Aksesoris", "ikon": "/img/kat-aksesoris.png" }
+  ],
+  "flashSale": [
+    { "id": 101, "nama": "Tempat pensil kardus", "harga": 5000, "hargaAwal": 10000, "terjual": 80, "gambar": "/img/produk.webp" },
+    { "id": 102, "nama": "Kotak serbaguna", "harga": 7500, "hargaAwal": 15000, "terjual": 65, "gambar": "/img/post-kardus.webp" },
+    { "id": 103, "nama": "Hiasan botol plastik", "harga": 6000, "hargaAwal": 12000, "terjual": 45, "gambar": "/img/post-kerajinan.webp" },
+    { "id": 104, "nama": "Sepatu bekas layak pakai", "harga": 45000, "hargaAwal": 90000, "terjual": 30, "gambar": "/img/sepatu.jpg" }
+  ],
+  "rekomendasi": [
+    { "id": 1, "nama": "Tempat pensil dari kardus", "kategori": "kardus", "harga": 10000, "hargaAwal": null, "rating": 4.9, "terjual": "10rb+", "lokasi": "Bandung", "gambar": "/img/produk.webp" },
+    { "id": 2, "nama": "Kotak penyimpanan kardus", "kategori": "kardus", "harga": 15000, "hargaAwal": 20000, "rating": 4.8, "terjual": "2rb+", "lokasi": "Bandung", "gambar": "/img/post-kardus.webp" },
+    { "id": 3, "nama": "Kardus bekas tebal (5 pcs)", "kategori": "kardus", "harga": 8000, "hargaAwal": null, "rating": 4.7, "terjual": "5rb+", "lokasi": "Jakarta", "gambar": "/img/kardus.jpg" },
+    { "id": 4, "nama": "Jaket daur ulang", "kategori": "fashion", "harga": 85000, "hargaAwal": 120000, "rating": 4.9, "terjual": "900+", "lokasi": "Surakarta", "gambar": "/img/fashion.jpg" },
+    { "id": 5, "nama": "Sepatu sneakers bekas", "kategori": "sepatu", "harga": 75000, "hargaAwal": null, "rating": 4.6, "terjual": "1rb+", "lokasi": "Bandung", "gambar": "/img/sepatu.jpg" },
+    { "id": 6, "nama": "Paket bahan DIY kreatif", "kategori": "diy", "harga": 25000, "hargaAwal": 30000, "rating": 4.8, "terjual": "3rb+", "lokasi": "Jakarta", "gambar": "/img/diy.jpg" },
+    { "id": 7, "nama": "Hiasan dari botol plastik", "kategori": "plastik", "harga": 12000, "hargaAwal": null, "rating": 4.7, "terjual": "1rb+", "lokasi": "Bandung", "gambar": "/img/post-kerajinan.webp" },
+    { "id": 8, "nama": "Lem tembak bekas", "kategori": "diy", "harga": 20000, "hargaAwal": 35000, "rating": 4.5, "terjual": "500+", "lokasi": "Surakarta", "gambar": "/img/post-lem.webp" },
+    { "id": 9, "nama": "Kotak pensil daur ulang", "kategori": "kardus", "harga": 10000, "hargaAwal": 15000, "rating": 4.9, "terjual": "8rb+", "lokasi": "Bandung", "gambar": "/img/kotak_pensil.jpg" },
+    { "id": 10, "nama": "Tempat pensil plastik", "kategori": "plastik", "harga": 9000, "hargaAwal": null, "rating": 4.6, "terjual": "4rb+", "lokasi": "Jakarta", "gambar": "/img/tempat_pensil.jpg" }
+  ]
+}

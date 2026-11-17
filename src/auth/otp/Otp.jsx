@@ -2,10 +2,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Kembali, Toast, ambil } from '../components/Bagian'
+import { ambilSesi, masukkanSesi } from '../sesi'
 import '../auth.css'
 
-const PANJANG = 4
 
+const PANJANG = 4
+// Komponen untuk halaman OTP (One-Time Password) yang digunakan untuk verifikasi akun pengguna.
 export default function Otp() {
   const navigate = useNavigate()
   const [kode, setKode] = useState(Array(PANJANG).fill(''))
@@ -13,7 +15,8 @@ export default function Otp() {
   const [toast, setToast] = useState('')
   const kotakRef = useRef([])
   const email = ambil('email-daftar')
-
+// Mengambil email dari sessionStorage untuk menampilkan pesan kepada pengguna.
+// belum terhubung ke backend, jadi kode OTP tidak benar-benar dikirimkan. Ini hanya untuk tujuan demonstrasi.
   useEffect(() => {
     if (detik === 0) return
     const t = setTimeout(() => setDetik(detik - 1), 1000)
@@ -58,12 +61,16 @@ export default function Otp() {
       return
     }
     tampilkan('Verifikasi berhasil, akun kamu sudah aktif ✓')
-    setTimeout(() => navigate('/'), 1000)
+    const sesiSaatIni = ambilSesi()
+    if (!sesiSaatIni?.accessToken) {
+      masukkanSesi(email || 'pengguna baru')
+    }
+    setTimeout(() => navigate('/marketplace'), 1000)
   }
 
   const mm = '00'
   const ss = String(detik).padStart(2, '0')
-
+// Render halaman OTP dengan form input untuk kode OTP, tombol kirim ulang, dan tombol verifikasi.
   return (
     <main className="auth-tengah">
       <Kembali />
@@ -90,7 +97,7 @@ export default function Otp() {
             />
           ))}
         </div>
-
+        {/* Render tombol kirim ulang yang akan muncul setelah 30 detik, dan tombol verifikasi untuk mengirimkan kode OTP. */}
         <p className="kirim-ulang">
           Belum dapat kode?{' '}
           {detik > 0 ? (

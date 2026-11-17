@@ -2,16 +2,28 @@
 import { useState } from 'react'
 import Ikon from './Ikon'
 import { pengguna, singkat } from '../data/data'
+import { api } from '../../lib/api'
+import { ambilToken } from '../../auth/sesi'
 
 export default function Postingan({ post, onUbah, onToast }) {
   const [bukaKomentar, setBukaKomentar] = useState(false)
   const [teksKomentar, setTeksKomentar] = useState('')
   const [panjang, setPanjang] = useState(false)
 
-  const jumlahSuka = post.suka + (post.disukai ? 1 : 0)
+  const jumlahSuka = post.suka + (post.disukai && !ambilToken() ? 1 : 0)
   const teksPendek = post.teks.length > 110 && !panjang
 
-  function suka() {
+  async function suka() {
+    if (ambilToken()) {
+      try {
+        const res = await api.post(`/community/posts/${post.id}/like`)
+        onUbah({ ...post, suka: res.suka, disukai: true })
+        return
+      } catch (err) {
+        onToast(err.message || 'Gagal menyukai postingan')
+        return
+      }
+    }
     onUbah({ ...post, disukai: !post.disukai })
   }
 
@@ -23,10 +35,37 @@ export default function Postingan({ post, onUbah, onToast }) {
     onToast('Link postingan disalin')
   }
 
-  function kirimKomentar(e) {
+  async function kirimKomentar(e) {
     e.preventDefault()
-    if (!teksKomentar.trim()) return
-    const baru = { id: Date.now(), nama: pengguna.nama, avatar: pengguna.avatar, teks: teksKomentar.trim(), waktu: 'Baru saja' }
+    const isi = teksKomentar.trim()
+    if (!isi) return
+
+    let baru = {
+      id: Date.now(),
+      nama: pengguna.nama,
+      avatar: pengguna.avatar,
+      teks: isi,
+      waktu: 'Baru saja',
+    }
+
+    if (ambilToken()) {
+      try {
+        const created = await api.post(`/community/posts/${post.id}/comments`, {
+          teks: isi,
+        })
+        baru = {
+          id: created.id,
+          nama: created.user?.nama || pengguna.nama,
+          avatar: created.user?.avatar || pengguna.avatar,
+          teks: created.teks,
+          waktu: 'Baru saja',
+        }
+      } catch (err) {
+        onToast(err.message || 'Gagal mengirim komentar')
+        return
+      }
+    }
+
     onUbah({ ...post, komentar: [baru, ...post.komentar] }, 'komentar')
     setTeksKomentar('')
   }

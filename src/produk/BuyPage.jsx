@@ -1,11 +1,70 @@
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import { api } from '../lib/api'
+import { ambilToken } from '../auth/sesi'
 
 const Item = '/img/kotak_pensil.jpg'
 const Map = '/img/map.png'
 
+const PRODUK_DEFAULT = {
+    id: 1,
+    nama: 'Tempat Pensil dari Kardus Bekas',
+    harga: 10000,
+    deskripsi: 'Tempat Pensil Daur Ulang yang terbuat dari Kardus bekas. Tempat pensil ini adalah variant Limited Edition.',
+    stok: 30,
+    lokasi: 'Bojongsoang, Bandung',
+    gambar: Item,
+    penjual: { nama: 'Halilintar Store' },
+}
+
 export default function BuyPage() {
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
+    const productId = searchParams.get('id')
+    const [produk, setProduk] = useState(PRODUK_DEFAULT)
+    const [memuatCart, setMemuatCart] = useState(false)
+
+    useEffect(() => {
+        let aktif = true
+        async function muatProduk() {
+            try {
+                const data = productId
+                    ? await api.get(`/products/${productId}`)
+                    : (await api.get('/products?perHalaman=1'))?.data?.[0]
+                if (aktif && data) {
+                    setProduk({
+                        ...PRODUK_DEFAULT,
+                        ...data,
+                        gambar: data.gambar || Item,
+                        penjual: data.penjual || PRODUK_DEFAULT.penjual,
+                    })
+                }
+            } catch {
+                /* fallback ke data default jika server offline */
+            }
+        }
+        muatProduk()
+        return () => { aktif = false }
+    }, [productId])
+
+    async function tambahKeranjang() {
+        if (!ambilToken()) {
+            navigate('/masuk')
+            return
+        }
+        setMemuatCart(true)
+        try {
+            await api.post('/cart', { productId: produk.id, jumlah: 1 })
+            navigate('/keranjang')
+        } catch (err) {
+            alert(err.message || 'Gagal menambahkan ke keranjang')
+        } finally {
+            setMemuatCart(false)
+        }
+    }
+
+    const hargaTampil = `Rp ${Number(produk.harga || 0).toLocaleString('id-ID')}`
     return (
         <>
             <Navbar />
@@ -54,17 +113,17 @@ export default function BuyPage() {
                             </div>
 
                             <h2 style={{ fontWeight: 700, color: "#111", margin: 0 }}>
-                                Tempat Pensil dari Kardus Bekas
+                                {produk.nama}
                             </h2>
                             <p style={{ fontSize: 28, fontWeight: 800, color: "#111", margin: "0 0 20px 0" }}>
-                                Rp 10.000
+                                {hargaTampil}
                             </p>
 
                             <h3 style={{ fontWeight: 700, color: "#111", margin: "0 0 6px 0" }}>
                                 Deskripsi produk
                             </h3>
                             <p style={{ color: "#444", margin: "0 0 14px 0" }}>
-                                Tempat Pensil Daur Ulang yang terbuat dari Kardus bekas. Tempat pensil ini adalah variant Limited Edition.
+                                {produk.deskripsi || PRODUK_DEFAULT.deskripsi}
                             </p>
 
                             <div style={{ borderBottom: "1px solid #eee", marginBottom: 14 }}></div>
@@ -339,13 +398,13 @@ export default function BuyPage() {
                                 <span style={{ color: "#4caf50", fontSize: 18, fontWeight: 700, cursor: "pointer", userSelect: "none" }}>+</span>
                             </div>
                             <span style={{ fontSize: 12, fontWeight: 600, color: "#222" }}>
-                                Stok Sisa: 30
+                                Stok Sisa: {produk.stok ?? 30}
                             </span>
                         </div>
 
                         <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 20 }}>
                             <span style={{ fontWeight: 600, color: "#222" }}>Sub Total:</span>
-                            <span style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>Rp 10.000</span>
+                            <span style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>{hargaTampil}</span>
                         </div>
 
                         <p style={{ fontWeight: 600, color: "#222", margin: "0 0 8px 0" }}>
@@ -361,13 +420,14 @@ export default function BuyPage() {
 
                         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                             <button
-                                onClick={() => navigate('/keranjang')}
+                                onClick={tambahKeranjang}
+                                disabled={memuatCart}
                                 style={{ flex: 1, backgroundColor: "#4caf50", color: "white", border: "none", borderRadius: 10, padding: "10px 12px", fontWeight: 600, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, cursor: "pointer", height: 42 }}
                             >
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M5 11l4-7M19 11l-4-7M2 11h20M4 11l1.5 8a2 2 0 0 0 2 1.7h9a2 2 0 0 0 2-1.7L20 11" />
                                 </svg>
-                                <span>Masukkan keranjang</span>
+                                <span>{memuatCart ? 'Menambahkan...' : 'Masukkan keranjang'}</span>
                             </button>
                             <button style={{ width: 42, height: 42, backgroundColor: "#e53935", color: "white", border: "none", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">

@@ -1,21 +1,74 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { api } from '../lib/api';
+import { ambilToken } from '../auth/sesi';
 import './PaymentPage.css';
 
 const PaymentPage = () => {
   const navigate = useNavigate();
   const [selectedPayment, setSelectedPayment] = useState('');
+  const [alamat, setAlamat] = useState(null);
+  const [cart, setCart] = useState({ items: [], subtotal: 150000 });
+  const [memproses, setMemproses] = useState(false);
+
+  useEffect(() => {
+    if (!ambilToken()) return;
+    let aktif = true;
+    Promise.all([
+      api.get('/addresses').catch(() => []),
+      api.get('/cart').catch(() => null),
+    ]).then(([addrs, cartRes]) => {
+      if (!aktif) return;
+      if (Array.isArray(addrs) && addrs.length > 0) {
+        setAlamat(addrs.find((a) => a.utama) || addrs[0]);
+      }
+      if (cartRes?.items?.length > 0) {
+        setCart(cartRes);
+      }
+    });
+    return () => { aktif = false; };
+  }, []);
 
   const handlePaymentSelect = (method) => {
     setSelectedPayment(method);
   };
 
-  const handleCheckout = () => {
+  const ongkir = 15000;
+  const biayaLayanan = 2000;
+  const totalBarang = cart.items.reduce((s, it) => s + it.jumlah, 0) || 2;
+  const subtotal = cart.subtotal || 150000;
+  const totalTagihan = subtotal + ongkir + biayaLayanan;
+
+  const handleCheckout = async () => {
     if (!selectedPayment) {
       alert('Silakan pilih metode pembayaran terlebih dahulu!');
       return;
     }
+
+    if (ambilToken() && cart.items.length > 0) {
+      setMemproses(true);
+      try {
+        const alamatTeks = alamat
+          ? `${alamat.penerima} (${alamat.telepon}) - ${alamat.detail}, ${alamat.kota}, ${alamat.provinsi}`
+          : 'Jl. Telekomunikasi No. 1, Bandung, Jawa Barat';
+        const order = await api.post('/orders', {
+          metodeBayar: selectedPayment,
+          alamatKirim: alamatTeks,
+          ongkir: ongkir + biayaLayanan,
+        });
+        await api.patch(`/orders/${order.id}/status`, { status: 'DIBAYAR' }).catch(() => {});
+        alert(`Pesanan #EM-${order.id} berhasil dibuat & dibayar dengan metode: ${selectedPayment}`);
+        navigate('/marketplace');
+        return;
+      } catch (err) {
+        alert(err.message || 'Gagal memproses pembayaran');
+        return;
+      } finally {
+        setMemproses(false);
+      }
+    }
+
     alert(`Pesanan berhasil dibuat dengan metode: ${selectedPayment}`);
     navigate('/');
   };
@@ -30,10 +83,10 @@ const PaymentPage = () => {
           <section className="payment-section">
             <h2>Alamat Pengiriman</h2>
             <div className="address-card">
-              <p><strong>Petrus Brammonsas Agustino</strong></p>
-              <p>Jl. Telekomunikasi No. 1, Terusan Buahbatu</p>
-              <p>Bandung, Jawa Barat, 40257</p>
-              <p>0812-XXXX-XXXX</p>
+              <p><strong>{alamat?.penerima || 'Petrus Brammonsas Agustino'}</strong></p>
+              <p>{alamat?.detail || 'Jl. Telekomunikasi No. 1, Terusan Buahbatu'}</p>
+              <p>{alamat ? `${alamat.kota}, ${alamat.provinsi}` : 'Bandung, Jawa Barat, 40257'}</p>
+              <p>{alamat?.telepon || '0812-XXXX-XXXX'}</p>
               <button className="btn-edit-address" onClick={() => navigate('/profil')}>Ubah Alamat</button>
             </div>
           </section>
@@ -79,20 +132,16 @@ const PaymentPage = () => {
             
             <div className="summary-items">
               <div className="summary-row">
-                <span>Total Harga (2 barang)</span>
-                <span>Rp 150.000</span>
+                <span>Total Harga ({totalBarang} barang)</span>
+                <span>Rp {subtotal.toLocaleString('id-ID')}</span>
               </div>
               <div className="summary-row">
                 <span>Total Ongkos Kirim</span>
-                <span>Rp 15.000</span>
-              </div>
-              <div className="summary-row">
-                <span>Diskon</span>
-                <span className="discount">- Rp 10.000</span>
+                <span>Rp {ongkir.toLocaleString('id-ID')}</span>
               </div>
               <div className="summary-row">
                 <span>Biaya Layanan</span>
-                <span>Rp 2.000</span>
+                <span>Rp {biayaLayanan.toLocaleString('id-ID')}</span>
               </div>
             </div>
 
@@ -100,14 +149,15 @@ const PaymentPage = () => {
 
             <div className="summary-total">
               <span>Total Tagihan</span>
-              <span className="total-price">Rp 157.000</span>
+              <span className="total-price">Rp {totalTagihan.toLocaleString('id-ID')}</span>
             </div>
 
             <button 
               className={`btn-pay-now ${selectedPayment ? 'ready' : ''}`} 
               onClick={handleCheckout}
+              disabled={memproses}
             >
-              Bayar Sekarang
+              {memproses ? 'Memproses...' : 'Bayar Sekarang'}
             </button>
           </section>
         </div>

@@ -13,30 +13,11 @@
     padding-bottom: env(safe-area-inset-bottom, 0px)
 }
 
-@media (prefers-color-scheme:dark) {
-    :root:not([data-theme="light"]) {
-        --bg: #16200f;
-        --card: #1f2a18;
-        --text: #eee;
-        --muted: #aaa;
-        --field: #26331d;
-        --shadow: rgba(0, 0, 0, .5)
-    }
-}
-
-* {
-    box-sizing: border-box
-}
-
-html {
-    scroll-padding-top: env(safe-area-inset-top, 0px)
-}
-
 body {
     margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Poppins', system-ui, sans-serif;
+    background: #f6fbf7;
+    color: #111827;
+    font-family: 'Plus Jakarta Sans', 'Poppins', system-ui, sans-serif;
     font-size: 14px
 }
 

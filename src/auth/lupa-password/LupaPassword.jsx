@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { InputPassword, Kembali, emailValid } from '../components/Bagian'
 import '../auth.css'
 
+
+// Komponen untuk halaman Lupa Password yang digunakan untuk mengatur ulang password pengguna.
 function IkonEmail() {
   return (
     <svg viewBox="0 0 120 100" width="110" aria-hidden="true">
@@ -17,6 +19,7 @@ function IkonEmail() {
   )
 }
 
+// Komponen untuk halaman Lupa Password yang digunakan untuk mengatur ulang password pengguna.
 function IkonPerisai() {
   return (
     <svg viewBox="0 0 80 90" width="70" aria-hidden="true">
@@ -28,6 +31,7 @@ function IkonPerisai() {
   )
 }
 
+// Komponen untuk halaman Lupa Password yang digunakan untuk mengatur ulang password pengguna.
 export default function LupaPassword() {
   const [langkah, setLangkah] = useState(1)
   const [popup, setPopup] = useState('') 
@@ -36,6 +40,7 @@ export default function LupaPassword() {
   const [ulang, setUlang] = useState('')
   const [error, setError] = useState({})
 
+  // Fungsi untuk menangani pengiriman form email. Validasi format email dilakukan di sini.
   function kirimEmail(e) {
     e.preventDefault()
     if (!emailValid(email)) {
@@ -45,12 +50,12 @@ export default function LupaPassword() {
     setError({})
     setPopup('email')
   }
-
+// Fungsi untuk melanjutkan ke langkah pengaturan password setelah email berhasil dikirim.
   function lanjutKePassword() {
     setPopup('')
     setLangkah(2)
   }
-
+// Fungsi untuk menangani pengiriman form password. Validasi panjang password dan kesamaan password dilakukan di sini.
   function kirimPassword(e) {
     e.preventDefault()
     const err = {}
@@ -59,7 +64,7 @@ export default function LupaPassword() {
     setError(err)
     if (Object.keys(err).length === 0) setPopup('berhasil')
   }
-
+// Render halaman Lupa Password dengan form input untuk email, password baru, dan konfirmasi password, serta menampilkan popup sesuai dengan langkah yang sedang dilakukan.
   return (
     <main className="auth-tengah">
       <Kembali />
